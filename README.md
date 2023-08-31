@@ -12,7 +12,7 @@ This project is going to be a helpful resource for EMU students.  This applicati
 >Computer Science major, 27 years old. Experience programming with python, java, javascript and C. I like playing the piano and studying the french language. I want to create a great project this semester and get experience with scrum and agile development methods.
 
 ### Reed McAlpin - Team Member
-I am a computer science major with a music minor. I love video games, cooking, and playing music. I am great at coding in Java, Python, JavaScript, HTML, and CSS. I also have experience with C, C#, and PHP. I want my outcome of the project I'm working on to be a success and I would like to gain more experience being in a group.
+>I am a computer science major with a music minor. I love video games, cooking, and playing music. I am great at coding in Java, Python, JavaScript, HTML, and CSS. I also have experience with C, C#, and PHP. I want my outcome of the project I'm working on to be a success and I would like to gain more experience being in a group.
 
 ### Salvador Medina-Ruiz - Team Member
 >I am 21 years old and a computer science undergrad in my last year at EMU. I love creating and playing video-games, as well as drawing and listening to music. I am proficient in Java and Python, but am familiar with many other languages like C++, HTML, Javascript, etc. I hope to come out of this class knowing the process of successful teamwork in creating a project!

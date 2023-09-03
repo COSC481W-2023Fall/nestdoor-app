@@ -21,7 +21,7 @@ This project is going to be a helpful resource for EMU students.  This applicati
 >I am 21 years old and a computer science undergrad in my last year at EMU. I love creating and playing video-games, as well as drawing and listening to music. I am proficient in Java and Python, but am familiar with many other languages like C++, HTML, Javascript, etc. I hope to come out of this class knowing the process of successful teamwork in creating a project!
 
 ### LaMonte Nunn - Team Member
->(Newest team member - bio is pending)
+>I am 22 - Currently Interning at Motherson Group. I work with Java, React JS, MSSQL, Flutter/Dart, and VB. I am in my 4th year. I enjoy the gym and gun ranges. I am most importantly here to learn new things while working as a team!
 
 ### Hailey O'Sullivan - Team Member
 >I am a third year Data Science & Analytics undergraduate major. I have experience in Python, Java, JavaScript,  HTML, and CSS, as well as database management and analytics. I love spending time outside, traveling, and staying as active as I can. I’m very excited to spend the semester learning from everyone in the group and working efficiently together!

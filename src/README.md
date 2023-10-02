@@ -32,3 +32,14 @@ This project is going to be a helpful resource for EMU students.  This applicati
 ### James W Taylor II - Team Member
 >I am a computer science major working toward expanding my technical skillset.  Professionally, I am a patent attorney for Cummings, McClorey, Davis, and Acho, where I head its intellectual property procurement department and assist in their litigation department.  I am educated and hold graduate level degrees in chemistry and the law from excellent institutions.  I am proficient in php, C#, c++, and java.
 
+## Project Layout (what each folder/subfolder does.) 
+
+## Setup Instructions:
+The steps for setting up the repository for running.
+List the versions of the programming languages you use for developing the project.
+List any dependencies and their versions for setting up your project and how to install those dependencies.  For example, Xampp, composer, Django, Android Studio, etc.
+Describe:
+how to get source code for your project and how to set up the source code
+how to start your app
+how to access your app
+

@@ -38,6 +38,7 @@ This project is going to be a helpful resource for EMU students.  This applicati
 &nbsp;&nbsp;&nbsp;&nbsp;**-"nestdoor" folder:** contains project files (settings.py, urls.py, wsgi.py, etc.) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;**-"nestdoorapp" folder:** contains app files (migrations folder, admin.py, apps.py, models.py, tests.py, and views.py) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;**-"static" folder:** will contain images, JavaScript, and CSS files to serve the app <br>
+&nbsp;&nbsp;&nbsp;&nbsp;**-"templates" folder:** will contain the view templates for what the user sees <br>
 &nbsp;&nbsp;&nbsp;&nbsp;**-"manage.py" file** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;**-"requirements.txt" file:** lists the packages necessary to run the code but also registers their versions <br>
 &nbsp;&nbsp;&nbsp;&nbsp;**-"runtime.txt" file:** contains Python version to be run upon deployment

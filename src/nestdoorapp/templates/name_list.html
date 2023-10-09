@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Names List</title>
+</head>
+<body>
+    <h1>User database</h1>
+    <ul>
+        {% for name in all %}
+            <li>{{ name.first_name }} {{ name.last_name }}</li>
+            <li>{{ name.email }}</li>
+        {% empty %}
+            <li>No names have been entered yet.</li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'join' %}">Go Back to Join Page</a></p>
+</body>
+</html>

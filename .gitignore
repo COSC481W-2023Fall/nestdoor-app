@@ -5,3 +5,4 @@ venv/
 .vscode/
 src/nestdoor/__pycache__
 src/functional_tests/chromedriver
+

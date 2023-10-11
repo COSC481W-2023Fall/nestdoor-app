@@ -6,6 +6,9 @@ from . serializer import *
 from .forms import Memberform
 # Create your views here.
 
+def home_screen_view(request):
+    return render(request, "base.html", {}) #<-- {} for database variables
+
 def join(request):
     if request.method == "POST":
         form = Memberform(request.POST or None)

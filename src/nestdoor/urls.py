@@ -19,9 +19,13 @@ from django.urls import path,include
 # from django.conf.urls import url
 from nestdoorapp.views import *
 
+from nestdoorapp.views import (
+    home_screen_view,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', ReactView.as_view(), name="something"),
+    path('', home_screen_view, name="home"),
+    #path('', ReactView.as_view(), name="something"),
     path('views/', include('nestdoorapp.urls')),
 ]

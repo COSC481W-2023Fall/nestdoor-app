@@ -21,11 +21,19 @@ from nestdoorapp.views import *
 
 from nestdoorapp.views import (
     home_screen_view,
+    login_view,
+    logout_view,
+    forum_view,
+    about_view,
 )
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', home_screen_view, name="home"),
+    path('login/', login_view, name="login"),
+    path('logout/', logout_view, name="logout"),
+    path('forum/', forum_view, name="forum"),
+    path('about/', about_view, name="about"),
     #path('', ReactView.as_view(), name="something"),
     path('views/', include('nestdoorapp.urls')),
 ]

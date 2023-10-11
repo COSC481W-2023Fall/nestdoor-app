@@ -7,7 +7,19 @@ from .forms import Memberform
 # Create your views here.
 
 def home_screen_view(request):
-    return render(request, "base.html", {}) #<-- {} for database variables
+    return render(request, "homepage.html", {}) #<-- {} for database variables
+
+def login_view(request):
+    return render(request, "login.html", {}) #<-- {} for database variables
+
+def logout_view(request):
+    return render(request, "logout.html", {}) #<-- {} for database variables
+
+def forum_view(request):
+    return render(request, "forum.html", {}) #<-- {} for database variables
+
+def about_view(request):
+    return render(request, "about.html", {}) #<-- {} for database variables
 
 def join(request):
     if request.method == "POST":

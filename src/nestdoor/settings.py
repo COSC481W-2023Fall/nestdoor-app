@@ -121,6 +121,9 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+STATICFILES_DIRS = [
+    BASE_DIR / "nestdoorapp" / "static"
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

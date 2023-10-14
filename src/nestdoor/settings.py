@@ -147,7 +147,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "nestdoorapp" / "static"
+    BASE_DIR / "nestdoorapp" / "static" / "css",
+    BASE_DIR / "nestdoorapp" / "static" / "images"
 ]
 
 REST_FRAMEWORK = {

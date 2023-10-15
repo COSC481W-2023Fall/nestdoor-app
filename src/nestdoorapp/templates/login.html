@@ -1,12 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="static/css/homepage.css" />
+        <link rel="stylesheet" type="text/css" href={% static '/css/homepage.css' %}/>
     </head>
     <body>
         <div class="topnav">
-            <a class="active" href="">Home</a>
-            <a href="/login">Login</a>
+            <a href=""><img src= {% static '/images/reed_logo1.png' %} alt="Nestdoor App Logo Large" style="width:20px;height:20px;" class="center" ></a>
+            <a href="/homepage">Home</a>
+            <a class="active" href="">Login</a>
             <a href="/logout">Logout</a>
             <a href="/forum">Forum</a>
             <a href="/about">About</a>

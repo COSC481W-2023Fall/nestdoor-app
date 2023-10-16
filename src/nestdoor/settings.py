@@ -34,8 +34,7 @@ DEBUG = os.getenv("DEBUG", "True") == "True"
 
 # Edited for Digital Ocean Deployment
 #ALLOWED_HOSTS = ("nestdoor-app-zcquw.ondigitalocean.app,127.0.0.1,localhost").split(",")
-ALLOWED_HOSTS = (
-    "127.0.0.1,localhost",os.getenv("ALLOWED_HOST", "nestdoor-app-zcquw.ondigitalocean.app")).split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOST","127.0.0.1,localhost").split(",")
 
 # Added for Digital Ocean Deployment
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"

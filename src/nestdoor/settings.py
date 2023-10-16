@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
 # Edited for Digital Ocean Deployment
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS","127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "nestdoor-app-zcquw.ondigitalocean.app", "127.0.0.1,localhost").split(",")
 
 # Added for Digital Ocean Deployment
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"

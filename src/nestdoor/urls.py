@@ -15,9 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path
 # from django.conf.urls import url
 from nestdoorapp.views import *
+from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 from nestdoorapp.views import (
     home_screen_view,
@@ -28,12 +32,12 @@ from nestdoorapp.views import (
 )
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path('homepage/', home_screen_view, name="home"),
-    path('login/', login_view, name="login"),
-    path('logout/', logout_view, name="logout"),
-    path('forum/', forum_view, name="forum"),
-    path('about/', about_view, name="about"),
-    #path('', ReactView.as_view(), name="something"),
-    path('views/', include('nestdoorapp.urls')),
+    path('', views.home_screen_view, name='home'),
+    path('homepage/', views.home_screen_view, name='home'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.login_view, name='logout'),
+    path('forum/', views.login_view, name='forum'),
+    path('about/', views.login_view, name='about'),
+    path('view1/', views.join, name='join'),
+    path('view2/', views.name_list, name='name_list'),
 ]

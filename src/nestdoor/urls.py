@@ -29,7 +29,7 @@ from nestdoorapp.views import (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', home_screen_view, name="home"),
+    path('homepage/', home_screen_view, name="home"),
     path('login/', login_view, name="login"),
     path('logout/', logout_view, name="logout"),
     path('forum/', forum_view, name="forum"),

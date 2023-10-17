@@ -14,13 +14,31 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
 # from django.conf.urls import url
-from nestdoorapp.views import *
+from nestdoorapp import views 
+from django.conf import settings
+from django.conf.urls.static import static
 
+
+from nestdoorapp.views import (
+    home_screen_view,
+    login_view,
+    logout_view,
+    forum_view,
+    about_view,
+)
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path('', ReactView.as_view(), name="something"),
+    path('', views.home_screen_view, name='home'),
+    path('admin/', admin.site.urls),
+    path('homepage/', views.home_screen_view, name='home'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('forum/', views.forum_view, name='forum'),
+    path('about/', views.about_view, name='about'),
+    path('view1/', views.join, name='join'),
+    path('view2/', views.name_list, name='name_list'),
 ]

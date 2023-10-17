@@ -1,7 +1,6 @@
 from selenium import webdriver 
-from nestdoorapp.models import React, Member 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase 
-from django.urls import reverse
+from selenium.webdriver.common.by import By
 import time
 
 class TestHomePageView (StaticLiveServerTestCase) :
@@ -16,3 +15,7 @@ class TestHomePageView (StaticLiveServerTestCase) :
         self.browser.get(self.live_server_url + '/homepage')
         self.browser.maximize_window()
         time.sleep(10)
+        button = self.browser.find_element(By.LINK_TEXT, "Home")
+        self.assertTrue(
+            button
+        )

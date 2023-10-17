@@ -29,7 +29,6 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 # Edited for Digital Ocean Deployment
 DEBUG = os.getenv("DEBUG", "True") == "True"
-print(DEBUG)
 
 # Edited for Digital Ocean Deployment
 #ALLOWED_HOSTS = ("nestdoor-app-zcquw.ondigitalocean.app,127.0.0.1,localhost").split(",")
@@ -139,7 +138,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 # Edited for Digital Ocean Deployment
-STATIC_URL = "nestdoorapp/static/"
+STATIC_URL = BASE_DIR / "nestdoorapp/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "nestdoorapp/static/")
 
 # Default primary key field type
@@ -148,8 +147,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "nestdoorapp/static/")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "nestdoorapp" / "static" / "css",
-    BASE_DIR / "nestdoorapp" / "static" / "images"
+    BASE_DIR / "nestdoorapp/static/css",
+    BASE_DIR / "nestdoorapp/static/images"
 ]
 
 REST_FRAMEWORK = {

@@ -2,6 +2,7 @@ from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase 
 from selenium.webdriver.common.by import By
 import time
+from django.urls import reverse
 
 class TestHomePageView (StaticLiveServerTestCase) :
 
@@ -18,4 +19,9 @@ class TestHomePageView (StaticLiveServerTestCase) :
         button = self.browser.find_element(By.LINK_TEXT, "Home")
         self.assertTrue(
             button
+        )
+        detail_url = self.live_server_url + reverse("home")
+        self.assertEquals(
+            self.browser.current_url,
+            detail_url
         )

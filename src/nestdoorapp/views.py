@@ -21,6 +21,9 @@ def forum_view(request):
 def about_view(request):
     return render(request, "about.html", {}) #<-- {} for database variables
 
+def test_view(request):
+    return render(request, "test.html", {})
+    
 def join(request):
     if request.method == "POST":
         form = Memberform(request.POST or None)

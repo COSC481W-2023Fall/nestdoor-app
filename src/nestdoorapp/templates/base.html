@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
+    </head>
+    <body>
+        <div id="page-container">
+                <div id="content-wrap">
+                {% include './snippets/banner_snippet.html' %}
+                {% block content %}
+
+                {% endblock content %}
+                {% include './snippets/logo_snippet.html' %}
+                </div>
+                {% include './snippets/footer_snippet.html' %}
+        </div>
+    </body>
+</html>

@@ -29,6 +29,7 @@ from nestdoorapp.views import (
     logout_view,
     forum_view,
     about_view,
+    test_view,
 )
 
 urlpatterns = [
@@ -41,4 +42,5 @@ urlpatterns = [
     path('about/', views.about_view, name='about'),
     path('view1/', views.join, name='join'),
     path('view2/', views.name_list, name='name_list'),
+    path('test/', views.test_view, name="test")
 ]

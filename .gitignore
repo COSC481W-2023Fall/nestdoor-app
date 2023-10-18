@@ -3,4 +3,5 @@ src/.DS_Store
 venv/
 *.pyc
 .vscode/
-src\nestdoor\__pycache__
+src/nestdoor/__pycache__
+src/functional_tests/chromedriver

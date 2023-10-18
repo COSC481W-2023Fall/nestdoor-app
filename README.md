@@ -54,3 +54,18 @@ The project is dependent upon Django, for which I used version 3.2.21.* <br>
 https://docs.google.com/document/d/1bUtCPEyTHIpRfFQoiVwa1NLU1t6pqlqXHrwzEljA87E/edit?usp=sharing***
 <br> Source code is located in this repository.
 <br> The app will be accessible once we can deploy on Digital Ocean (we need to finish a couple tasks in Sprint 1 for this)
+
+
+10/08/2023 -- Dianlu
+# Setup Frontend and Backend 
+Open a terminal, run the following commands to initiate react.
+$ cd frontend
+$ npm start
+
+Open another terminal, run the following commands to initiate Django.
+$ cd scr
+$ python manage.py runserver
+
+database rootusername and password:
+admin
+admin

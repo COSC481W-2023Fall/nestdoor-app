@@ -48,7 +48,7 @@ class Post(models.Model):
             
         class Meta:
             db_constraints = {
-                'post_moderation_content_missing': 'CHECK (content IS NOT NULL)',
+                'post_moderation_content_missing': 'CHECK (moderated_note IS NOT NULL)',
             }
 
     # check constraint that a post id is set
@@ -59,7 +59,7 @@ class Post(models.Model):
         
     class Meta:
         db_constraints = {
-            'post_id_missing': 'CHECK (content IS NOT NULL)',
+            'post_id_missing': 'CHECK (post_id IS NOT NULL)',
         }
 
 class Reply(models.Model):
@@ -96,7 +96,7 @@ class Reply(models.Model):
             
         class Meta:
             db_constraints = {
-                'post_moderation_content_missing': 'CHECK (content IS NOT NULL)',
+                'post_moderation_content_missing': 'CHECK (moderated_note IS NOT NULL)',
             }
 
     # check constraint that a reply id is set
@@ -107,7 +107,7 @@ class Reply(models.Model):
         
     class Meta:
         db_constraints = {
-            'reply_id_missing': 'CHECK (content IS NOT NULL)',
+            'reply_id_missing': 'CHECK (reply_id IS NOT NULL)',
         }
 
 # FOR BUILDINGS
@@ -123,6 +123,28 @@ class Building(models.Model):
     gps_longitude = models.DecimalField(max_digits=9, decimal_places=6)
     gps_latitude = models.DecimalField(max_digits=9, decimal_places=6)
     description = models.TextField()
+
+    # check constraint that a building address is not empty
+        def clean(self):
+            super().clean()
+            if self.address is None:
+                raise ValidationError('Building address must be specified.')
+            
+        class Meta:
+            db_constraints = {
+                'building_address_missing': 'CHECK (address IS NOT NULL)',
+            }
+
+    # check constraint that building description is not empty
+        def clean(self):
+            super().clean()
+            if self.description is None:
+                raise ValidationError('Building description must be specifed.')
+            
+        class Meta:
+            db_constraints = {
+                'building_description_missing': 'CHECK (description IS NOT NULL)',
+            }
     
 class BuildingPost(models.Model):  # many to many linking table for when posts mention buildings
     id = models.AutoField(primary_key=True)
@@ -133,7 +155,7 @@ class BuildingReply(models.Model): # many to many linking table for when replies
     id = models.AutoField(primary_key=True)
     reply_id = models.ForeignKey(Reply, on_delete=models.CASCADE)
     building_id = models.ForeignKey(Building, on_delete=models.CASCADE)
-    
+
 class Location(models.Model): # locations within buildings
     location_id = models.AutoField(primary_key=True)
     building_id = models.ForeignKey(Building, blank=True, null=True, on_delete=models.CASCADE)
@@ -155,6 +177,17 @@ class Location(models.Model): # locations within buildings
             'location_building_or_gps_coords': 'CHECK (building_id IS NOT NULL OR (gps_longitude IS NOT NULL AND gps_latitude IS NOT NULL))',
         }
 
+    # check constraint that location description is not empty
+        def clean(self):
+            super().clean()
+            if self.description is None:
+                raise ValidationError('Location description must be specifed.')
+            
+        class Meta:
+            db_constraints = {
+                'location_description_missing': 'CHECK (description IS NOT NULL)',
+            }
+            
 class LocationPost(models.Model):  # many to many linking table for when posts mention locations
     id = models.AutoField(primary_key=True)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)

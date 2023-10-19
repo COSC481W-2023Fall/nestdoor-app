@@ -29,6 +29,39 @@ class Post(models.Model):
     last_moderated_by = models(User, null=True, on_delete=models.SET_NULL)
     moderated_note = models.TextField()
 
+    # check constraint that a post contains content
+        def clean(self):
+            super().clean()
+            if self.content is None:
+                raise ValidationError('Add content in order to post.')
+            
+        class Meta:
+            db_constraints = {
+                'post_content_missing': 'CHECK (content IS NOT NULL)',
+            }
+
+    # check constraint that a post moderation note contains content
+        def clean(self):
+            super().clean()
+            if self.moderated_note is None:
+                raise ValidationError('Notes about moderations need to be included.')
+            
+        class Meta:
+            db_constraints = {
+                'post_moderation_content_missing': 'CHECK (content IS NOT NULL)',
+            }
+
+    # check constraint that a post id is set
+    def clean(self):
+        super().clean()
+        if self.post_id is None:
+            raise ValidationError('Post Id must be set.')
+        
+    class Meta:
+        db_constraints = {
+            'post_id_missing': 'CHECK (content IS NOT NULL)',
+        }
+
 class Reply(models.Model):
     # main
     reply_id = models.AutoField(primary_key=True)
@@ -43,7 +76,40 @@ class Reply(models.Model):
     datetime_last_moderated = models.DateTimeField(null=True)
     last_moderated_by = models(User, null=True, on_delete=models.SET_NULL)
     moderated_note = models.TextField()
-    
+
+    # check constraint that a reply contains content
+        def clean(self):
+            super().clean()
+            if self.content is None:
+                raise ValidationError('Add content in order to reply.')
+            
+        class Meta:
+            db_constraints = {
+                'reply_content_missing': 'CHECK (content IS NOT NULL)',
+            }
+
+    # check constraint that a reply moderation note contains content
+        def clean(self):
+            super().clean()
+            if self.moderated_note is None:
+                raise ValidationError('Notes about moderations need to be included.')
+            
+        class Meta:
+            db_constraints = {
+                'post_moderation_content_missing': 'CHECK (content IS NOT NULL)',
+            }
+
+    # check constraint that a reply id is set
+    def clean(self):
+        super().clean()
+        if self.reply_id is None:
+            raise ValidationError('Reply Id must be set.')
+        
+    class Meta:
+        db_constraints = {
+            'reply_id_missing': 'CHECK (content IS NOT NULL)',
+        }
+
 # FOR BUILDINGS
 # FOR BUILDINGS
 # FOR BUILDINGS

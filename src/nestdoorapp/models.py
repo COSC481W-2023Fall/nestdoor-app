@@ -30,26 +30,26 @@ class Post(models.Model):
     moderated_note = models.TextField()
 
     # check constraint that a post contains content
-        def clean(self):
-            super().clean()
-            if self.content is None:
-                raise ValidationError('Add content in order to post.')
+    def clean(self):
+        super().clean()
+        if self.content is None:
+            raise ValidationError('Add content in order to post.')
             
-        class Meta:
-            db_constraints = {
-                'post_content_missing': 'CHECK (content IS NOT NULL)',
-            }
+    class Meta:
+        db_constraints = {
+            'post_content_missing': 'CHECK (content IS NOT NULL)',
+        }
 
     # check constraint that a post moderation note contains content
-        def clean(self):
-            super().clean()
-            if self.moderated_note is None:
-                raise ValidationError('Notes about moderations need to be included.')
+    def clean(self):
+        super().clean()
+        if self.moderated_note is None:
+            raise ValidationError('Notes about moderations need to be included.')
             
-        class Meta:
-            db_constraints = {
-                'post_moderation_content_missing': 'CHECK (moderated_note IS NOT NULL)',
-            }
+    class Meta:
+        db_constraints = {
+            'post_moderation_content_missing': 'CHECK (moderated_note IS NOT NULL)',
+        }
 
     # check constraint that a post id is set
     def clean(self):
@@ -78,26 +78,26 @@ class Reply(models.Model):
     moderated_note = models.TextField()
 
     # check constraint that a reply contains content
-        def clean(self):
-            super().clean()
-            if self.content is None:
-                raise ValidationError('Add content in order to reply.')
+    def clean(self):
+        super().clean()
+        if self.content is None:
+            raise ValidationError('Add content in order to reply.')
             
-        class Meta:
-            db_constraints = {
-                'reply_content_missing': 'CHECK (content IS NOT NULL)',
-            }
+    class Meta:
+        db_constraints = {
+            'reply_content_missing': 'CHECK (content IS NOT NULL)',
+        }
 
     # check constraint that a reply moderation note contains content
-        def clean(self):
-            super().clean()
-            if self.moderated_note is None:
-                raise ValidationError('Notes about moderations need to be included.')
+    def clean(self):
+        super().clean()
+        if self.moderated_note is None:
+            raise ValidationError('Notes about moderations need to be included.')
             
-        class Meta:
-            db_constraints = {
-                'post_moderation_content_missing': 'CHECK (moderated_note IS NOT NULL)',
-            }
+    class Meta:
+        db_constraints = {
+            'post_moderation_content_missing': 'CHECK (moderated_note IS NOT NULL)',
+        }
 
     # check constraint that a reply id is set
     def clean(self):
@@ -125,26 +125,26 @@ class Building(models.Model):
     description = models.TextField()
 
     # check constraint that a building address is not empty
-        def clean(self):
-            super().clean()
-            if self.address is None:
-                raise ValidationError('Building address must be specified.')
+    def clean(self):
+        super().clean()
+        if self.address is None:
+            raise ValidationError('Building address must be specified.')
             
-        class Meta:
-            db_constraints = {
-                'building_address_missing': 'CHECK (address IS NOT NULL)',
-            }
+    class Meta:
+        db_constraints = {
+            'building_address_missing': 'CHECK (address IS NOT NULL)',
+        }
 
     # check constraint that building description is not empty
-        def clean(self):
-            super().clean()
-            if self.description is None:
-                raise ValidationError('Building description must be specifed.')
+    def clean(self):
+        super().clean()
+        if self.description is None:
+            raise ValidationError('Building description must be specifed.')
             
-        class Meta:
-            db_constraints = {
-                'building_description_missing': 'CHECK (description IS NOT NULL)',
-            }
+    class Meta:
+        db_constraints = {
+            'building_description_missing': 'CHECK (description IS NOT NULL)',
+        }
     
 class BuildingPost(models.Model):  # many to many linking table for when posts mention buildings
     id = models.AutoField(primary_key=True)
@@ -200,26 +200,26 @@ class Location(models.Model): # locations within buildings
         }
 
     # check constraint that location description is not empty
-        def clean(self):
-            super().clean()
-            if self.description is None:
-                raise ValidationError('Location description must be specifed.')
+    def clean(self):
+        super().clean()
+        if self.description is None:
+            raise ValidationError('Location description must be specifed.')
             
-        class Meta:
-            db_constraints = {
-                'location_description_missing': 'CHECK (description IS NOT NULL)',
-            }
+    class Meta:
+        db_constraints = {
+            'location_description_missing': 'CHECK (description IS NOT NULL)',
+        }
 
     # check constraint that a location id is set
-        def clean(self):
-            super().clean()
-            if self.location_id is None:
-                raise ValidationError('Location Id must be set.')
+    def clean(self):
+        super().clean()
+        if self.location_id is None:
+            raise ValidationError('Location Id must be set.')
             
-        class Meta:
-            db_constraints = {
-                'location_id_missing': 'CHECK (location_id IS NOT NULL)',
-            }
+    class Meta:
+        db_constraints = {
+            'location_id_missing': 'CHECK (location_id IS NOT NULL)',
+        }
 
 class LocationPost(models.Model):  # many to many linking table for when posts mention locations
     id = models.AutoField(primary_key=True)

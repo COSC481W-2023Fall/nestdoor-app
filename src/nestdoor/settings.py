@@ -30,10 +30,11 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Edited for Digital Ocean Deployment
-DEBUG = os.getenv("DEBUG", "False") == "True"
+# DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = True
 
 # Edited for Digital Ocean Deployment
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "nestdoor-app-zcquw.ondigitalocean.app", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 # Added for Digital Ocean Deployment
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
@@ -95,6 +96,7 @@ WSGI_APPLICATION = "nestdoor.wsgi.application"
 } """
 # Edited for Digital Ocean Deployment
 # ATTN: Jamie and Hailey
+DEVELOPMENT_MODE = True
 if DEVELOPMENT_MODE is True:
     DATABASES = {
         "default": {

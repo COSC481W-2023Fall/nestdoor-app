@@ -17,7 +17,13 @@
                 </div>
                 
                 <h1>Welcome to the Temporary Login Page!</h1>
-                <a href="/homepage"><img src={% static '/images/reed_logo1.png' %} alt="Nestdoor App Logo Large" style="width:200px;height:400px;" class="center" ></a>
+                {% block content %}
+                <form method="post">
+                    {% csrf_token %}{{form|crispy}}
+                <p>Don't have an account? Create one <a href="/sign-up">Here</a>!</p>
+                <button type="submit" class="btn btn-success">Login</button>
+                </form>
+                {% endblock %}
 
                 <div class="h_line"></div>
                 <h1 class="split-para"><a href="/login">Login</a> <br/> <a href="/logout">Logout</a> </br> <a href="/sign-up">Sign Up</a> <span><a href="/forum">Newest Posts!</a></span></h1>
@@ -27,13 +33,6 @@
                 </div>
                 -->
                 <div class="h_line"></div>
-{% block content %}
-<form method="post">
-  {% csrf_token %}{{form|crispy}}
-  <p>Don't have an account? Create one <a href="/sign-up">Here</a>!</p>
-  <button type="submit" class="btn btn-success">Login</button>
-</form>
-{% endblock %}
                 
             </div>
             <div class="footer">

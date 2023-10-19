@@ -8,13 +8,20 @@ from django.contrib.auth import login, logout, authenticate
 # Create your views here.
 
 def home_screen_view(request):
+    
     return render(request, "homepage.html", {}) #<-- {} for database variables
 
 def login_view(request):
+    i = 0
+    if requre.method == "POST":
+        i = 1
+    print(i)
     return render(request, "login.html", {}) #<-- {} for database variables
 
 def logout_view(request):
-    return render(request, "logout.html", {}) #<-- {} for database variables
+    logout(request)
+    return redirect(home)
+    #return render(request, "home.html", {}) #<-- {} for database variables
 
 def forum_view(request):
     return render(request, "forum.html", {}) #<-- {} for database variables

@@ -150,11 +150,33 @@ class BuildingPost(models.Model):  # many to many linking table for when posts m
     id = models.AutoField(primary_key=True)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     building_id = models.ForeignKey(Building, on_delete=models.CASCADE)
+
+    # check constraint that a building post id is set
+    def clean(self):
+        super().clean()
+        if self.id is None:
+            raise ValidationError('Id must be set.')
+        
+    class Meta:
+        db_constraints = {
+            'id_missing': 'CHECK (id IS NOT NULL)',
+        }
     
 class BuildingReply(models.Model): # many to many linking table for when replies mention buildings
     id = models.AutoField(primary_key=True)
     reply_id = models.ForeignKey(Reply, on_delete=models.CASCADE)
     building_id = models.ForeignKey(Building, on_delete=models.CASCADE)
+
+    # check constraint that a building reply id is set
+    def clean(self):
+        super().clean()
+        if self.id is None:
+            raise ValidationError('Id must be set.')
+        
+    class Meta:
+        db_constraints = {
+            'id_missing': 'CHECK (id IS NOT NULL)',
+        }
 
 class Location(models.Model): # locations within buildings
     location_id = models.AutoField(primary_key=True)
@@ -187,13 +209,46 @@ class Location(models.Model): # locations within buildings
             db_constraints = {
                 'location_description_missing': 'CHECK (description IS NOT NULL)',
             }
+
+    # check constraint that a location id is set
+        def clean(self):
+            super().clean()
+            if self.location_id is None:
+                raise ValidationError('Location Id must be set.')
             
+        class Meta:
+            db_constraints = {
+                'location_id_missing': 'CHECK (location_id IS NOT NULL)',
+            }
+
 class LocationPost(models.Model):  # many to many linking table for when posts mention locations
     id = models.AutoField(primary_key=True)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE)
+
+    # check constraint that a location post id is set
+    def clean(self):
+        super().clean()
+        if self.id is None:
+            raise ValidationError('Id must be set.')
+        
+    class Meta:
+        db_constraints = {
+            'id_missing': 'CHECK (id IS NOT NULL)',
+        }
     
 class LocationReply(models.Model): # many to many linking table for when replies mention locations
     id = models.AutoField(primary_key=True)
     reply_id = models.ForeignKey(Reply, on_delete=models.CASCADE)
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE)
+
+    # check constraint that a location reply id is set
+    def clean(self):
+        super().clean()
+        if self.id is None:
+            raise ValidationError('Id must be set.')
+        
+    class Meta:
+        db_constraints = {
+            'id_missing': 'CHECK (id IS NOT NULL)',
+        }

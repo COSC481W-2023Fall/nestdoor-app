@@ -43,6 +43,23 @@
               style="width: 28px; height: 28px"
               class="center"
           /></a> -->
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
+    </head>
+    <body>
+        <div id="page-container">
+            <div id="content-wrap">
+                <div class="topnav">
+                    <a href="/homepage"><img src={% static '/images/reed_logo_mini.png' %} alt="Nestdoor App Logo Small" style="width:30px;height:30px;" class="center" ></a>
+                    <a class="active" href="">Home</a>
+                    <a href="/login">Login</a>
+                    <a href="/logout">Logout</a>
+                    <a href="/forum">Forum</a>
+                    <a href="/about">About</a>
+                </div>
+                
+                <h1>Welcome to the Temporary Home Page!</h1>
+                <a href="/homepage"><img src={% static '/images/reed_logo1.png' %} alt="Nestdoor App Logo Large" style="width:200px;height:400px;" class="center" ></a>
 
           <a class="active" href="">Home</a>
           <a href="/login">Login</a>

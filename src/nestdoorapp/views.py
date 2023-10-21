@@ -13,13 +13,12 @@ def home_screen_view(request):
 
 def login_view(request):
     i = 0
-    if requre.method == "POST":
-        i = 1
     print(i)
     return render(request, "login.html", {}) #<-- {} for database variables
 
 def logout_view(request):
-    logout(request)
+    i = logout(request)
+    print("Print: " + i)
     return redirect(home)
     #return render(request, "home.html", {}) #<-- {} for database variables
 
@@ -29,6 +28,19 @@ def forum_view(request):
 def about_view(request):
     return render(request, "about.html", {}) #<-- {} for database variables
 
+def sign_up(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request,user)
+            return redirect('/homepage')
+    else:
+        form = RegisterForm()
+        
+    return render(request, 'registration/sign_up.html', {"form":form})
+
+#####Test_Views
 def join(request):
     if request.method == "POST":
         form = Memberform(request.POST or None)
@@ -42,18 +54,6 @@ def join(request):
 def name_list(request):
     all_members = Member.objects.all()
     return render(request, 'name_list.html', {'all': all_members})
-
-def sign_up(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request,user)
-            return redirect('/homepage')
-    else:
-        form = RegisterForm()
-        
-    return render(request, 'registration/sign_up.html', {"form":form})
 
 class ReactView(APIView):
     

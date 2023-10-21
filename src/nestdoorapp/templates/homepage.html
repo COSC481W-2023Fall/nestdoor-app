@@ -12,7 +12,6 @@
                     <a href="/homepage"><img src={% static '/images/reed_logo_mini.png' %} alt="Nestdoor App Logo Small" style="width:30px;height:30px;" class="center" ></a>
                     <a class="active" href="">Home</a>
                     {% if user.is_authenticated %}
-                    <span> Logged in as {{user.username}} | </span>
                     <a href="/logout">Logout</a>
                     {% else %}
                     <a href="/login">Login</a>
@@ -22,6 +21,10 @@
                 </div>
                 
                 <h1>Welcome to the Temporary Home Page!</h1>
+                {% if user.is_authenticated %}
+                <span> Welcome! Logged in as {{user.username}}</span>
+                {% endif %}
+
                 <a href="/homepage"><img src={% static '/images/reed_logo1.png' %} alt="Nestdoor App Logo Large" style="width:200px;height:400px;" class="center" ></a>
 
                 <div class="h_line"></div>

@@ -22,6 +22,7 @@ from nestdoorapp import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+#THIS IS THE URL FILE DJANGO USES!!!
 
 from nestdoorapp.views import (
     home_screen_view,

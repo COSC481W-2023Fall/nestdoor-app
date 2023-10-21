@@ -3,22 +3,42 @@ from rest_framework.views import APIView
 from . models import *
 from rest_framework.response import Response
 from . serializer import *
-from .forms import Memberform, RegisterForm
+from .forms import Memberform, RegisterForm, UserAuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 # Create your views here.
 
 def home_screen_view(request):
-    
     return render(request, "homepage.html", {}) #<-- {} for database variables
 
 def login_view(request):
-    i = 0
-    print(i)
-    return render(request, "login.html", {}) #<-- {} for database variables
+    context = {}
+
+    #Check if user is already logged in.
+    user = request.user
+    if user.is_authenticated:
+        return redirect('home')
+
+    #Check if requesting user login
+    if request.method == "POST":
+        form = UserAuthenticationForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+
+            if user:
+                login(request, user)
+                return redirect('home')
+
+    #Else normal user login page.
+    else:
+        form = UserAuthenticationForm()
+    context['login_form'] = form
+    return render(request, "registration/login.html", context) #<-- {} for database variables
 
 def logout_view(request):
-    i = logout(request)
-    print("Print: " + i)
+    logout(request)
+    print("logged out")
     return redirect(home)
     #return render(request, "home.html", {}) #<-- {} for database variables
 

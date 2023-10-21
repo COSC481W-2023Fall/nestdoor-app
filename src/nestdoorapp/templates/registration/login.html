@@ -17,13 +17,38 @@
                 </div>
                 
                 <h1>Welcome to the Temporary Login Page!</h1>
-                {% block content %}
+                
                 <form method="post">
-                    {% csrf_token %}{{form|crispy}}
-                <p>Don't have an account? Create one <a href="/sign-up">Here</a>!</p>
+                    {% csrf_token %}
+                    <!-- {{ form|crispy }} -->
+                    {% for field in login_form %}
+                        <p style="color: black;">
+                            {{field.label_tag}}
+                            {{field}}
+
+                            {% if field.help_text %}
+                                <small style="color: grey;">
+                                    {{field.help_text}}
+                                </small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <p style="color: red;">
+                                    {{error}}
+                                </p>
+                            {% endfor %}
+                        </p>
+                        {% endfor %}
+                        {% if login_form.non_field_errors %}
+                                <div style="color:red;">
+                                    <p>
+                                        {{login_form.non_field_errors}}
+                                    </p>
+                                </div>
+                            {% endif %}
+                    <div> Don't have an account? Create one <a href="/sign-up">Here</a>! </div>
                 <button type="submit" class="btn btn-success">Login</button>
                 </form>
-                {% endblock %}
+                
 
                 <div class="h_line"></div>
                 <h1 class="split-para"><a href="/login">Login</a> <br/> <a href="/logout">Logout</a> </br> <a href="/sign-up">Sign Up</a> <span><a href="/forum">Newest Posts!</a></span></h1>

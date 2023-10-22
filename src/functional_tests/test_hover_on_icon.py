@@ -32,7 +32,7 @@ class TestJoinPage (StaticLiveServerTestCase) :
     #         detail_url
     #     )
 
-
+# test hovering on lego
     def test_hover_over_element(self):
         self.browser.get(self.live_server_url + '/homepage')
 

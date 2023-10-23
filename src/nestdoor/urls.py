@@ -14,10 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import include, path
 # from django.conf.urls import url
-from nestdoorapp.views import *
+from nestdoorapp import views 
+from django.conf import settings
+from django.conf.urls.static import static
+
+#THIS IS THE URL FILE DJANGO USES!!!
 
 from nestdoorapp.views import (
     home_screen_view,
@@ -28,12 +33,7 @@ from nestdoorapp.views import (
 )
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path('homepage/', home_screen_view, name="home"),
-    path('login/', login_view, name="login"),
-    path('logout/', logout_view, name="logout"),
-    path('forum/', forum_view, name="forum"),
-    path('about/', about_view, name="about"),
-    #path('', ReactView.as_view(), name="something"),
-    path('views/', include('nestdoorapp.urls')),
+    path('', include('nestdoorapp.urls')),
+    #path('admin/', admin.site.urls),
+    path('', include('django.contrib.auth.urls')),
 ]

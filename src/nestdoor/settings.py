@@ -51,7 +51,11 @@ INSTALLED_APPS = [
     "nestdoorapp",
     "rest_framework",
     "corsheaders",
+    'crispy_forms',
+    'crispy_bootstrap5'
 ]
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -96,6 +100,7 @@ WSGI_APPLICATION = "nestdoor.wsgi.application"
 } """
 # Edited for Digital Ocean Deployment
 # ATTN: Jamie and Hailey
+DEVELOPMENT_MODE = True
 if DEVELOPMENT_MODE is True:
     DATABASES = {
         "default": {
@@ -160,3 +165,5 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = '/login'

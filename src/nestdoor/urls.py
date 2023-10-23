@@ -16,12 +16,13 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 # from django.conf.urls import url
 from nestdoorapp import views 
 from django.conf import settings
 from django.conf.urls.static import static
 
+#THIS IS THE URL FILE DJANGO USES!!!
 
 from nestdoorapp.views import (
     home_screen_view,
@@ -32,13 +33,7 @@ from nestdoorapp.views import (
 )
 
 urlpatterns = [
-    path('', views.home_screen_view, name='home'),
-    path('admin/', admin.site.urls),
-    path('homepage/', views.home_screen_view, name='home'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
-    path('forum/', views.forum_view, name='forum'),
-    path('about/', views.about_view, name='about'),
-    path('view1/', views.join, name='join'),
-    path('view2/', views.name_list, name='name_list'),
+    path('', include('nestdoorapp.urls')),
+    #path('admin/', admin.site.urls),
+    path('', include('django.contrib.auth.urls')),
 ]

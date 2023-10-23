@@ -26,6 +26,64 @@
                 {% endif %}
 
                 <a href="/homepage"><img src={% static '/images/reed_logo1.png' %} alt="Nestdoor App Logo Large" style="width:200px;height:400px;" class="center" ></a>
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/homepage.css' %}"
+    />
+
+    <!-- add this line in order to let git stage changes. -->
+    <!-- for test in liveserver --lu -->
+    <!-- <link rel="stylesheet" type="text/css" href="../static/css/homepage.css" /> -->
+
+    <!-- for test inside template folder -- lu -->
+    <!-- <link rel="stylesheet" type="text/css" href="homepage.css" /> -->
+
+    <!-- $$ added -->
+    <meta charset="UTF-8" />
+    name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- save for future use --lu -->
+      <!-- <div class="section"></div>
+      <div class="section"></div> -->
+      <div class="image"></div>
+    </div>
+
+    <div id="page-container">
+      <div id="content-wrap">
+        <div class="topnav">
+          <a href="/homepage"
+            ><img src={% static '/images/reed_logo_mini.png' %} alt="Nestdoor App
+            Logo Small" style="width: 28px; height: 28px" class="center" /></a
+          >
+
+          <!-- for test inside template folder -- lu -->
+          <!-- <a href="/homepage"
+            ><img
+              src="LogoMini.png"
+              alt="Nestdoor App Logo Small"
+              style="width: 28px; height: 28px"
+              class="center"
+          /></a> -->
+
+          <a class="active" href="">Home</a>
+          <a href="/login">Login</a>
+          <a href="/logout">Logout</a>
+          <a href="/forum">Forum</a>
+          <a href="/about">About</a>
+        </div>
+
+        <br />
+
+        <h1>Welcome to the Temporary Home Page!</h1>
+        <!-- <a href="/homepage"
+          ><img src={% static '/images/reed_logo1.png' %} alt="Nestdoor App Logo
+          Large" style="width:400px;height:400px;" class="center" ></a
+        > -->
 
                 <div class="h_line"></div>
                 <h1 class="split-para">

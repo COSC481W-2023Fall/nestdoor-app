@@ -10,8 +10,11 @@
                 <div class="topnav">
                     <a href="/homepage"><img src={% static '/images/reed_logo_mini.png' %} alt="Nestdoor App Logo Small" style="width:30px;height:30px;" class="center" ></a>
                     <a href="/homepage">Home</a>
-                    <a class="active"  href="">Login</a>
+                    {% if user.is_authenticated %}
                     <a href="/logout">Logout</a>
+                    {% else %}
+                    <a class="active" href="/login">Login</a>
+                    {% endif %}
                     <a href="/forum">Forum</a>
                     <a href="/about">About</a>
                 </div>

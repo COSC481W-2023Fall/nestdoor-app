@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
+    </head>
+    <body>
+        <div id="page-container">
+            <div id="content-wrap">
+                <div class="topnav">
+                    <a href="/homepage"><img src={% static '/images/reed_logo_mini.png' %} alt="Nestdoor App Logo Small" style="width:30px;height:30px;" class="center" ></a>
+                    <a href="/homepage">Home</a>
+                    {% if user.is_authenticated %}
+                    <a href="/logout">Logout</a>
+                    {% else %}
+                    <a href="/login">Login</a>
+                    {% endif %}
+                    <a href="/forum">Forum</a>
+                    <a class="active" href="">About</a>
+                </div>
+                
+                <h1>Welcome to the Temporary About Page!</h1>
+
+                {% if user.is_authenticated %}
+                <span> Welcome! Logged in as {{user.username}}</span>
+                {% endif %}
+
+                <div class="h_line"></div>
+                <h1 class="split-para"><a href="/login">Login</a> <br/> <a href="/logout">Logout</a> <span><a href="/forum">Newest Posts!</a></span></h1>
+                <!--
+                <div class="vl">
+                    <a href="/forum"><h1>Newest Posts!</h1></a>
+                </div>
+                -->
+                <div class="h_line"></div>
+                
+            </div>
+            <div class="footer">
+                <p class="footer-text-left">
+                    TEAM EAGLES
+                </p>
+                <p class="footer-text-right">
+                    COSC 481
+                </p>
+                <div class="footer-content-center">
+                    <a href="/homepage"><img src={% static '/images/reed_logo2.png' %} class="icon-style" alt="Nestdoor App Logo Small"></a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

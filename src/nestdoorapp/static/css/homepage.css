@@ -1,3 +1,29 @@
+/* added background */
+/* global style -- lu */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* set the frame for the element -- lu */
+.wrapper {
+  position:absolute;
+  width: 100%;
+}
+
+/* specifiied attributes -- lu */
+.wrapper .image {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Set the body's height to cover the entire viewport */
+  background: url('../images/reed_logo1.png');
+  background-size: 200px 400px;
+  background-position: center;
+  background-repeat: repeat; 
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+}
+
 body {
     background-color: floralwhite;
     padding-top: 20px;

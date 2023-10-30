@@ -21,7 +21,19 @@
                 
                 <h1>Welcome to the Temporary Forum Page!</h1>
                 {% if user.is_authenticated %}
-                <span> Welcome! Logged in as {{user.username}}</span>
+                    <span> Welcome! Logged in as {{user.username}}</span>
+                    <div style="color: black; padding-left: 10px;">
+                    <form method="post">
+                    {% csrf_token %}
+                    {% for field in post_form %}
+                            <label>Ask a question:</label>
+                            <br>
+                            {{field}}
+                    {% endfor %}
+                        <br>
+                            <button type="submit" class="btn btn-success">Create Post</button>
+                </form>
+                </div>
                 {% endif %}
 
                 <div class="h_line"></div>

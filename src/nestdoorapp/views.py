@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from . models import *
 from rest_framework.response import Response
 from . serializer import *
-from .forms import Memberform, RegisterForm, UserAuthenticationForm
+from .forms import Memberform, RegisterForm, UserAuthenticationForm, PostCreationForm
 from django.contrib.auth import login, logout, authenticate
 # Create your views here.
 
@@ -43,7 +43,17 @@ def logout_view(request):
     #return render(request, "home.html", {}) #<-- {} for database variables
 
 def forum_view(request):
-    return render(request, "forum.html", {}) #<-- {} for database variables
+    context = {}
+    print(request.method)
+    if request.method == "GET":
+        form = PostCreationForm(request.GET)
+    if request.method == "POST":
+        form = PostCreationForm(request.POST)
+        user = request.user
+        if form.is_valid():
+            post = form.save()
+    context['post_form'] = form
+    return render(request, "forum.html", context) #<-- {} for database variables
 
 def about_view(request):
     return render(request, "about.html", {}) #<-- {} for database variables

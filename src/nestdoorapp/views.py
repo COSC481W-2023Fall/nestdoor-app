@@ -60,6 +60,9 @@ def sign_up(request):
         
     return render(request, 'registration/sign_up.html', {"form":form})
 
+def user_profile_view(request):
+    return render(request, "userprofilepage.html", {})
+
 #####Test_Views
 def join(request):
     if request.method == "POST":

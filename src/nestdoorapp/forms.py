@@ -14,16 +14,10 @@ class RegisterForm(UserCreationForm):
 
 class PostCreationForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea(attrs={'name':'body', 'rows':3, 'cols':50}))
-
+    title = forms.CharField()
     class Meta:
         model = Post
-        fields = ('content', 'posted_by')
-
-    def clean(self):
-        content = self.cleaned_data['content']
-        posted_by = self.cleaned_data['posted_by']
-        if not save(content=content):
-            raise forms.ValidationError("No content.")
+        fields = ['title', 'content',]
 
 
 class UserAuthenticationForm(forms.ModelForm):

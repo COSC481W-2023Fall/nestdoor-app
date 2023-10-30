@@ -24,20 +24,23 @@ class Member(models.Model):
 # MAIN DISCUSSIONS
 # MAIN DISCUSSIONS
 # MAIN DISCUSSIONS
+
     
 class Post(models.Model):
     # main
-    post_id = models.AutoField(primary_key=True)
-    datetime_posted = models.DateTimeField()
-    posted_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="posts")
+    post_id = models.AutoField(primary_key=True, unique=True)
+    title = models.CharField(max_length=255)
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="posts")
     content = models.TextField()
-    number_replies = models.IntegerField()
-    datetime_last_edited = models.DateTimeField(null=True)
+    #datetime_posted = models.DateTimeField(auto_now_add=True)
+    #number_replies = models.IntegerField(default=0, unique=False)
+    #datetime_last_edited = models.DateTimeField(null=True, auto_now_add=True)
     
+    #Moderation functionality removed for the time being.
     # moderation
-    datetime_last_moderated = models.DateTimeField(null=True)
-    last_moderated_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="posts_moderated")
-    moderated_note = models.TextField()
+    #datetime_last_moderated = models.DateTimeField(null=True, default=None)
+    #last_moderated_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="posts_moderated")
+    #moderated_note = models.TextField()
     
     def clean(self):
         super().clean()
@@ -45,19 +48,19 @@ class Post(models.Model):
         if self.content is None:
             raise ValidationError('Add content in order to post.')
         # check constraint that a post moderation note contains content
-        if self.moderated_note is None:
-            raise ValidationError('Notes about moderations need to be included.')
+        #if self.moderated_note is None:
+            #raise ValidationError('Notes about moderations need to be included.')
         # check constraint that a post id is set
-        if self.post_id is None:
-            raise ValidationError('Post Id must be set.')
+        #if self.post_id is None:
+        #   raise ValidationError('Post Id must be set.')
             
     class Meta:
         constraints = [
             models.CheckConstraint(check=models.Q(content__isnull=False), name="post_content_missing"),
             #'post_content_missing': 'CHECK (content IS NOT NULL)',
-            models.CheckConstraint(check=models.Q(moderated_note__isnull=False), name="post_moderation_content_missing"),
+            #models.CheckConstraint(check=models.Q(moderated_note__isnull=False), name="post_moderation_content_missing"),
             #'post_moderation_content_missing': 'CHECK (moderated_note IS NOT NULL)',
-            models.CheckConstraint(check=models.Q(post_id__isnull=False), name="post_id_missing")
+            #models.CheckConstraint(check=models.Q(post_id__isnull=False), name="post_id_missing")
             #'post_id_missing': 'CHECK (post_id IS NOT NULL)',
         ]
         

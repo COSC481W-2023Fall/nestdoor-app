@@ -44,14 +44,25 @@ def logout_view(request):
 
 def forum_view(request):
     context = {}
-    print(request.method)
+
+    #Default request GET
     if request.method == "GET":
         form = PostCreationForm(request.GET)
+
+    #If request post, user trying to submit a post
     if request.method == "POST":
-        form = PostCreationForm(request.POST)
         user = request.user
+        form = PostCreationForm(request.POST)
         if form.is_valid():
-            post = form.save()
+            print("valid form")
+            obj = form.save(commit=False)
+            obj.author = user
+            obj.save()
+            form = PostCreationForm(request.GET)
+            context['post_form'] = form
+            return render(request, 'forum.html', context)
+        else:
+            print("form not valid")
     context['post_form'] = form
     return render(request, "forum.html", context) #<-- {} for database variables
 

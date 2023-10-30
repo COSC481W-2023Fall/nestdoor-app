@@ -26,10 +26,18 @@
                     <form method="post">
                     {% csrf_token %}
                     {% for field in post_form %}
-                            <label>Ask a question:</label>
-                            <br>
-                            {{field}}
+                                {{field.label_tag}}
+                                <br>
+                                {{field}}
                     {% endfor %}
+
+                    {% if login_form.non_field_errors %}
+                                <div style="color:red;">
+                                    <p>
+                                        {{post_form.non_field_errors}}
+                                    </p>
+                                </div>
+                    {% endif %}
                         <br>
                             <button type="submit" class="btn btn-success">Create Post</button>
                 </form>

@@ -49,7 +49,13 @@ def about_view(request):
     return render(request, "about.html", {}) #<-- {} for database variables
 
 def user_post_view(request):
-    return render(request, "userpost.html", {}) #<-- {} for database variables
+    id = request.POST.get('id', '200') #<-- 200 is just a default random value in case id does not exist
+    try:
+        Post.objects.filter(post_id=id)[0]
+    except:
+        print("An error occured with post_id")
+    context = {'Post':Post}
+    return render(request, "userpost.html", context) #<-- {} for database variables
 
 def sign_up(request):
     if request.method == 'POST':

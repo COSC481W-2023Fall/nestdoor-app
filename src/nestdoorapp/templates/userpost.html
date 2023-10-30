@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static '/css/userpost.css' %}" />
         <meta charset="UTF-8" />
         <title>User Detailed Post</title>
     </head>
@@ -31,8 +31,9 @@
                 <h1>Welcome to the Temporary User Detailed Post Page!</h1>
                 <h1>Spot for User Name</h1>
                 <h1>Spot for user post, video, and/or image</h1>
-                <h1>Spot for comments</h1>
-                
+                <div class="post_content">{{Post.content}}</div> <!-- Supposed to show content from the post maybe? --Sal-->
+                <h1>Spot for comments below</h1>
+                <!-- Please include your work for "comment on user's detailed post" pbi here --Sal-->
             </div>
             <div class="footer">
                 <p class="footer-text-left">

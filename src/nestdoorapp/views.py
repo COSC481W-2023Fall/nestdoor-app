@@ -48,6 +48,9 @@ def forum_view(request):
 def about_view(request):
     return render(request, "about.html", {}) #<-- {} for database variables
 
+def user_post_view(request):
+    return render(request, "userpost.html", {}) #<-- {} for database variables
+
 def sign_up(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)

@@ -61,7 +61,13 @@ def sign_up(request):
     return render(request, 'registration/sign_up.html', {"form":form})
 
 def user_profile_view(request):
-    return render(request, "userprofilepage.html", {})
+    id = request.POST.get('id', '200') #Gets the post id from the post request from the Forum. 200 is just a default random value in case id does not exist
+    try:
+        Post.objects.filter(post_id=id)[0] #Checks if the id from the url is equals to any post_id from the database and grabs the first value
+    except:
+        print("An error occured with post_id")
+    context = {'Post':Post} #Passes that first value (the post id) to the context
+    return render(request, "userprofilepage.html", context)
 
 #####Test_Views
 def join(request):

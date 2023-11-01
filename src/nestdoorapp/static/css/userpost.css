@@ -36,22 +36,17 @@ body {
   }
 
 .post_content {
-  background-color: aliceblue;
+  background-color: floralwhite;
+  height:400px;
+  width:1000px;
+  border:5px solid darkgreen;
+  font:16px/26px Georgia, Garamond, Serif;
+  overflow: auto;
 }
 
-/* Horizontal and Veritcal line Styling */  
-.h_line {
-    border-bottom: 6px solid darkgreen;
-    padding-top: 15px;
-    width: auto;
-    margin: auto;
-}
-.vl {
-    border-left: 6px solid darkgreen;
-    padding-left: 23%;
-    padding-top: 15%;
-    height: 400px;
-    margin-inline: 50%;
+.postedby {
+  color: darkgreen;
+  padding-left: 3px;
 }
 
 /* Text Spanning */

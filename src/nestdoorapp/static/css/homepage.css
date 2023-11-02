@@ -16,7 +16,7 @@
   margin: 0;
   padding: 0;
   height: 100vh; /* Set the body's height to cover the entire viewport */
-  background: url('../images/reed_logo1.png');
+  /* background: url('../images/reed_logo1.png'); */
   background-size: 200px 400px;
   background-position: center;
   background-repeat: repeat; 
@@ -25,15 +25,37 @@
 }
 
 body {
-    background-color: floralwhite;
+    background-color: darkseagreen;
     padding-top: 50px;
   }
-  h1 {
+
+h1 {
+    font-family: 'Corben', Georgia, Times, serif;
+    font-size: 40px;
+    line-height: 55px;
+}
+
+h2, p{
+    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+h1.title {
+    padding-top: 25px;
     color: black;
-  }
-  p {
+    text-align: center;
+    text-shadow: 10em;
+}
+h2.subheading{
+  font-size: 15px;
+  color: black;
+  text-align: center;
+}
+
+p {
     color: white;
-  }
+}
 
 /* Horizontal and Veritcal line Styling */  
 .h_line {
@@ -75,7 +97,8 @@ body {
 
 /* Top navigation */
   .topnav {
-    background-color: darkgreen;
+    background-color: rgb(0, 107, 54);
+    font-family: 'Corben', Georgia, Times, serif;
     overflow: hidden;
     text-align: center;
     position: fixed;
@@ -120,28 +143,30 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 90px;
+    height: 70px;
     background-color: darkgreen;
     color: floralwhite;
     text-align: center;
   }
 
   .footer-text-left {
-    font-size:25px;
+    padding-top: 25px;
+    font-size:20px;
     padding-left:40px;
     float:left;
   }
 
   .footer-text-right {
-    font-size:25px;
+    padding-top: 25px;
+    font-size:20px;
     padding-right:40px;
     float:right;
   }
 
   .footer-content-center {
-    padding-block-start: 0%;
-    margin-top:20px;
+    padding-top: 40px;
     float:right;
+    color:whitesmoke
   }
 
   .icon-style {
@@ -149,9 +174,4 @@ body {
     padding-right: 10px;
     margin-left:0px;
     margin-top:0px;
-  }
-
-  .icon-style:hover {
-    background-color:yellow;
-    padding:5px;
   }

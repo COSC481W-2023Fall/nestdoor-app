@@ -150,23 +150,25 @@ p {
   }
 
   .footer-text-left {
-    padding-top: 25px;
+    color:whitesmoke;
+    padding-top: 10px;
     font-size:20px;
     padding-left:40px;
     float:left;
   }
 
   .footer-text-right {
-    padding-top: 25px;
+    color:whitesmoke;
+    padding-top: 10px;
     font-size:20px;
     padding-right:40px;
     float:right;
   }
 
   .footer-content-center {
-    padding-top: 40px;
+    padding-top: 10px;
     float:right;
-    color:whitesmoke
+    color:whitesmoke;
   }
 
   .icon-style {
@@ -174,4 +176,78 @@ p {
     padding-right: 10px;
     margin-left:0px;
     margin-top:0px;
+  }
+
+
+  .content-container {
+    
+    margin: 50px;
+    vertical-align: baseline;
+    display: grid;
+    gap: 15px; /*distance between elements in the container*/
+
+    grid-template-columns: 2fr 1fr 2fr;
+
+    grid-template-areas: "a . b"
+                         "a . b";
+}
+
+.popular {
+    border: double darkgreen 5px;
+    background-color: floralwhite;
+    grid-area: b;
+    text-align: center;
+}
+
+.signup {
+    border: double darkgreen 5px;
+    background-color: floralwhite;
+    margin: 30px;
+    grid-area: a;
+    text-align: center;
+}
+
+
+h2 {
+    font-family: 'Corben', Georgia, Times, serif;
+    font-size: 25px;
+    line-height: 55px;
+}
+
+
+h3 {
+    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.sub {
+    color:darkgreen;
+    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    line-height: 25px;
+}
+
+p {
+    margin: 20px;
+    color:darkgreen;
+    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+    font-size: 20x;
+    line-height: 25px;
+}
+
+.btn {
+    background-color: darkgreen;
+    border-radius: 4em;
+    color: whitesmoke;
+    padding: 15px 25px;
+    text-decoration: none;
+    font-weight: bolder;
+    margin-top: 30px;
+    font-family: 'Corben', Georgia, Times, serif;
+
+  }
+
+  .btn:hover {
+    background-color: darkseagreen;
   }

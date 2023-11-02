@@ -5,6 +5,10 @@
         <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
         <meta charset="UTF-8" />
         <title>Home Page</title>
+        <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
+
     </head>
     <body>
         <div class="wrapper">
@@ -17,8 +21,8 @@
         <div id="page-container">
             <div id="content-wrap">
                 <div class="topnav">
-                    <a href="/homepage"><img src={% static '/images/reed_logo_mini.png' %} alt="Nestdoor App Logo Small" style="width:30px;height:30px;" class="center" ></a>
-                    <a class="active" href="">Home</a>
+                    <a href="/homepage"><i class="fa-solid fa-crow"></i></a>
+                    <a class="active" href=""><i class="fa-solid fa-house"></i></a>
                     {% if user.is_authenticated %}
                     <a href="/logout">Logout</a>
                     {% else %}
@@ -28,7 +32,8 @@
                     <a href="/about">About</a>
                 </div>
                 
-                <h1>Welcome to the Temporary Home Page!</h1>
+                <h1 class="title">Welcome to Nestdoor</h1>
+                <h2 class="subheading">F i n d&nbsp;&nbsp;y o u r&nbsp;&nbsp;&nbsp;f l o c k .</h2>
                 {% if user.is_authenticated %}
                 <span> Welcome! Logged in as {{user.username}}</span>
                 {% endif %}
@@ -43,7 +48,6 @@
                 <a href="/sign-up">Sign Up</a> <span>
                 <a href="/forum">Newest Posts!</a></span></h1>
                 {% endif %}
-                <div class="h_line"></div>
                 <div class="container">{% block content %} {% endblock %}</div>
                 
             </div>
@@ -52,12 +56,8 @@
                     TEAM EAGLES
                 </p>
                 <p class="footer-text-right">
-                    COSC 481
+                    COSC 481/581 - Fall 2023
                 </p>
-
-                <div class="footer-content-center">
-                    <a href="/homepage"><img src={% static '/images/reed_logo2.png' %} class="icon-style" alt="Nestdoor App Logo Small"></a>
-                </div>
             </div>
         </div>
     </body>

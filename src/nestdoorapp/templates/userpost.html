@@ -6,6 +6,14 @@
         <meta charset="UTF-8" />
         <title>User Detailed Post</title>
     </head>
+    <style>
+    .comment-div {
+      width: 200px; /* Set your desired width */
+      height: 100px; /* Set your desired height */
+      background-color: white;
+      border: 1px solid black;
+    }
+  </style>
     <body>
         <div class="wrapper">
           <!-- save for future use --lu -->
@@ -30,10 +38,21 @@
                 
                 <h3>Temporary User Detailed Post Page</h3>
                 <h3>Giant white box below is for post content</h3>
-                <div class="post_content">{{Post.content}}</div> <!-- Supposed to show content from the post maybe? --Sal-->
-                <h5 class="postedby">Posted by: "username" on "date"</h5>
-                <h2>Comments</h2>
+                <div class="post_content">
+                    <h2>{{post.title}}</h2>
+                    {{post.content}}
+                </div> <!-- Supposed to show content from the post maybe? --Sal-->
+                <h5 class="postedby">Posted by: {{post.posted_by}} on {{post.datetime_posted}}</h5>
                 <!-- Please include your work for "comment on user's detailed post" pbi here Lu! --Sal-->
+                
+                <!-- Hi Lu, this is some started code for displaying comments, let me know if you need help... - Griff -->
+                <h2>Comments</h2>
+                {% for reply in replies %}
+                    <div class="comment-div">
+                    {{reply.content}}
+                    </div>
+                    <br>
+                {% endfor %}
             </div>
             <div class="footer">
                 <p class="footer-text-left">

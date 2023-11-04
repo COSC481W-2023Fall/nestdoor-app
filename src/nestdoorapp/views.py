@@ -44,6 +44,9 @@ def logout_view(request):
 
 def forum_view(request):
     context = {}
+    # Pass in post objects for display
+    posts = Post.objects.all()
+    context['posts'] = posts
 
     #Default request GET
     if request.method == "GET":

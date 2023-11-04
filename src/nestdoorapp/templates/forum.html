@@ -4,9 +4,27 @@
     <head>
         <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
     </head>
+    <style>
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .flex-box {
+            border: 1px solid black;
+            width: 200px;
+            height: 100px;
+            margin: 20px;
+            text-align: center;
+            font-size: 40px;
+            overflow: auto;
+        }
+    </style>
     <body>
         <div id="page-container">
             <div id="content-wrap">
+
                 <div class="topnav">
                     <a href="/homepage"><img src={% static '/images/reed_logo_mini.png' %} alt="Nestdoor App Logo Small" style="width:30px;height:30px;" class="center" ></a>
                     <a class="active" href="">Home</a>
@@ -45,6 +63,14 @@
                 </div>
                 {% endif %}
 
+                <div class="h_line"></div>
+                <div class="flex-container">
+                    {% for post in posts %}
+                    <div class="flex-box">
+                    <a href="">{{post.title}}</a>{{post.author}}  
+                    </div>
+                    {% endfor %}
+                </div>
                 <div class="h_line"></div>
                 <h1 class="split-para"><a href="/login">Login</a> <br/> <a href="/logout">Logout</a> <span><a href="/forum">Newest Posts!</a></span></h1>
                 <!--

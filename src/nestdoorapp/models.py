@@ -32,7 +32,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="posts")
     content = models.TextField()
-    #datetime_posted = models.DateTimeField(auto_now_add=True)
+    datetime_posted = models.DateTimeField(auto_now_add=True)
     #number_replies = models.IntegerField(default=0, unique=False)
     #datetime_last_edited = models.DateTimeField(null=True, auto_now_add=True)
     
@@ -46,6 +46,8 @@ class Post(models.Model):
         super().clean()
         # check constraint that a post contains content
         if self.content is None:
+            raise ValidationError('Add content in order to post.')
+        if self.title is None:
             raise ValidationError('Add content in order to post.')
         # check constraint that a post moderation note contains content
         #if self.moderated_note is None:

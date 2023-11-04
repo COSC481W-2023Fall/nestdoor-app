@@ -4,4 +4,3 @@ from .models import Member, Post, BuildingPost
 
 admin.site.register(Member)
 admin.site.register(Post)
-admin.site.register(BuildingPost)

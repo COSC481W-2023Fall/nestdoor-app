@@ -150,23 +150,23 @@ p {
   }
 
   .footer-text-left {
+    padding-top: 25px;
     color:whitesmoke;
-    padding-top: 10px;
     font-size:20px;
     padding-left:40px;
     float:left;
   }
 
   .footer-text-right {
+    padding-top: 25px;
     color:whitesmoke;
-    padding-top: 10px;
     font-size:20px;
     padding-right:40px;
     float:right;
   }
 
   .footer-content-center {
-    padding-top: 10px;
+    padding-top: 40px;
     float:right;
     color:whitesmoke;
   }

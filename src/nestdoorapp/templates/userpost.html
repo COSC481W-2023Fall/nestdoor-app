@@ -4,67 +4,51 @@
     <head>
         <link rel="stylesheet" type="text/css" href="{% static '/css/userpost.css' %}" />
         <meta charset="UTF-8" />
-        <title>User Detailed Post</title>
+        <title>{{post.posted_by}}'s post</title>
+        <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
     </head>
     <style>
-    .comment-div {
-      width: 200px; /* Set your desired width */
-      height: 100px; /* Set your desired height */
-      background-color: white;
-      border: 1px solid black;
-    }
   </style>
     <body>
-        <div class="wrapper">
-          <!-- save for future use --lu -->
-          <!-- <div class="section"></div>
-          <div class="section"></div> -->
-          <div class="image"></div>
-        </div>
-
         <div id="page-container">
             <div id="content-wrap">
                 <div class="topnav">
-                    <a href="/homepage"><img src={% static '/images/reed_logo_mini.png' %} alt="Nestdoor App Logo Small" style="width:30px;height:30px;" class="center" ></a>
-                    <a class="active" href="">Home</a>
+                    <a href="/homepage"><i class="fa-solid fa-crow"></i></a>
+                    <a href="/homepage"><i class="fa-solid fa-house"></i></a>
                     {% if user.is_authenticated %}
                     <a href="/logout">Logout</a>
                     {% else %}
                     <a href="/login">Login</a>
                     {% endif %}
-                    <a href="/forum">Forum</a>
+                    <a class="active" href="">Forum</a>
                     <a href="/about">About</a>
                 </div>
                 
-                <h3>Temporary User Detailed Post Page</h3>
-                <h3>Giant white box below is for post content</h3>
+                <h1 class = "title">{{post.title}}</h1>
                 <div class="post_content">
-                    <h2>{{post.title}}</h2>
                     {{post.content}}
-                </div> <!-- Supposed to show content from the post maybe? --Sal-->
+                </div> 
                 <h5 class="postedby">Posted by: {{post.posted_by}} on {{post.datetime_posted}}</h5>
                 <!-- Please include your work for "comment on user's detailed post" pbi here Lu! --Sal-->
-                
                 <!-- Hi Lu, this is some started code for displaying comments, let me know if you need help... - Griff -->
-                <h2>Comments</h2>
+                <h2 class = "subheading">Comments</h2>
                 {% for reply in replies %}
                     <div class="comment-div">
                     {{reply.content}}
                     </div>
                     <br>
                 {% endfor %}
+                <!-- Please include your work for "comment on user's detailed post" pbi here Lu! --Sal-->
             </div>
             <div class="footer">
                 <p class="footer-text-left">
-                    TEAM EAGLES
+                    <i class="fa-solid fa-copyright"></i> TEAM EAGLES
                 </p>
                 <p class="footer-text-right">
-                    COSC 481
+                    COSC 481/581 - Fall 2023
                 </p>
-
-                <div class="footer-content-center">
-                    <a href="/homepage"><img src={% static '/images/reed_logo2.png' %} class="icon-style" alt="Nestdoor App Logo Small"></a>
-                </div>
             </div>
         </div>
     </body>

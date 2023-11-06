@@ -10,8 +10,10 @@ urlpatterns = [
     path('homepage/', views.home_screen_view, name='home'),
     path('sign-up/', views.sign_up, name='sign_up'),
     path('login/', views.login_view, name='login'),
+    path('password_reset/', views.password_reset, name='password_reset'),
     path('forum/', views.forum_view, name='forum'),
     path('about/', views.about_view, name='about'),
     path('view1/', views.join, name='join'),
     path('view2/', views.name_list, name='name_list'),
+    #reset confirm/done/uidb64
 ]

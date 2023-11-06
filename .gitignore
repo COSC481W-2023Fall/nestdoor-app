@@ -1,6 +1,7 @@
 src/.DS_Store
 .DS_Store
 venv/
+.venv
 *.pyc
 .vscode/
 src/nestdoor/__pycache__

@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from . serializer import *
 from .forms import Memberform, RegisterForm, UserAuthenticationForm, PostCreationForm
 from django.contrib.auth import login, logout, authenticate
+from django.http import JsonResponse
 # Create your views here.
 
 def home_screen_view(request):
@@ -47,6 +48,7 @@ def forum_view(request):
     # Pass in post objects for display
     posts = Post.objects.all()
     context['posts'] = posts
+    total = Post.objects.count()
 
     #Default request GET
     if request.method == "GET":
@@ -66,8 +68,18 @@ def forum_view(request):
             return render(request, 'forum.html', context)
         else:
             print("form not valid")
+    
     context['post_form'] = form
-    return render(request, "forum.html", context) #<-- {} for database variables
+    return render(request, "forum.html", context={'posts': posts, 'total': total}) #<-- {} for database variables
+
+#If load more posts is clicked, load more posts
+def load_more(request):
+    loadposts = request.GET.get('next_posts')
+    loaded = int(offset)
+    postslimit = 4
+    post_four = list(Post.objects.values()[loaded:loaded+postslimit])
+    data = {'posts': post_four}
+    return JsonResponse(data=data)
 
 def about_view(request):
     return render(request, "about.html", {}) #<-- {} for database variables

@@ -21,6 +21,29 @@
             overflow: auto;
         }
     </style>
+    {{total|json_script:"json-total"}}
+    <script>
+        function loadMorePosts(){
+            const content_container = document.getElementById("content");
+            var _current_item = $('.single_content').length
+            $.ajax({
+                url: '',
+                type: 'GET',
+                data: {
+                    'next_posts': _current_item
+                },
+                success: function (response) {
+                    const data = response.posts
+                    data.map(post => {
+                        content_container.innerHTML += '<div class="flex-box"><a href="">${post.title}</a>${post.author}</div>'
+                    })
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+            })
+        }
+    </script>
     <body>
         <div id="page-container">
             <div id="content-wrap">
@@ -64,13 +87,19 @@
                 {% endif %}
 
                 <div class="h_line"></div>
-                <div class="flex-container">
-                    {% for post in posts %}
+                <div class="flex-container" id="content">
+                    <!-- {% for post in posts %} -->
                     <div class="flex-box">
                     <a href="">{{post.title}}</a>{{post.author}}  
                     </div>
-                    {% endfor %}
+                    <!-- {% endfor %} -->
                 </div>
+
+                <form method="get">
+                <div style="text-align:center;" name="loadmorebutton" id="loadpostsbutton">
+                    <button type="load" class="btn btn-success" onclick="loadMorePosts()">Load More Posts</button>
+                </div>
+                </form>
                 <div class="h_line"></div>
                 <h1 class="split-para"><a href="/login">Login</a> <br/> <a href="/logout">Logout</a> <span><a href="/forum">Newest Posts!</a></span></h1>
                 <!--

@@ -50,7 +50,7 @@ def about_view(request):
 
 def user_post_view(request):
     context = {}
-    post_id = 1 # ID num will we passed in... 1 is default
+    post_id = request.GET.get('postid', '1') # ID num will we passed in... 1 is default
     post = Post.objects.filter(post_id=post_id)[0]
     replies = Reply.objects.filter(for_post_id=post_id)
     context['post'] = post

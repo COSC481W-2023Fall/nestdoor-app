@@ -36,5 +36,5 @@ urlpatterns = [
     path('', include('nestdoorapp.urls')),
     path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
-    
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

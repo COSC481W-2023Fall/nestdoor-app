@@ -67,7 +67,9 @@
                 <div class="flex-container">
                     {% for post in posts %}
                     <div class="flex-box">
-                    <a href="">{{post.title}}</a>{{post.author}}  
+                        <form method="POST" id="detailed-post">
+                            <a href="/userpost?postid={{post.post_id}}">{{post.title}}</a> <br>{{post.author}}
+                        </form>
                     </div>
                     {% endfor %}
                 </div>

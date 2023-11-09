@@ -31,6 +31,7 @@ from nestdoorapp.views import (
     forum_view,
     about_view,
     user_profile_view,
+    user_post_view,
 )
 
 urlpatterns = [

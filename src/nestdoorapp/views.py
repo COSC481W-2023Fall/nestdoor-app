@@ -48,6 +48,21 @@ def forum_view(request):
 def about_view(request):
     return render(request, "about.html", {}) #<-- {} for database variables
 
+def user_post_view(request):
+    context = {}
+    post_id = request.GET.get('postid', '1') # ID num will we passed in... 1 is default
+    post = Post.objects.filter(post_id=post_id)[0]
+    replies = Reply.objects.filter(for_post_id=post_id)
+    context['post'] = post
+    context['replies'] = replies
+    # id = request.POST.get('id', '200') #Gets the post id from the post request from the Forum. 200 is just a default random value in case id does not exist
+    # try:
+    #     Post.objects.filter(post_id=id)[0] #Checks if the id from the url is equals to any post_id from the database and grabs the first value
+    # except:
+    #     print("An error occured with post_id")
+    # context = {'Post':Post} #Passes that first value (the post id) to the context
+    return render(request, "userpost.html", context) #<-- {} for database variables
+
 def sign_up(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)

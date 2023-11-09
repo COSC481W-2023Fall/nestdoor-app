@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
-from rest_framework.views import APIView
 from . models import *
-from rest_framework.response import Response
 from . serializer import *
 from .forms import Memberform, RegisterForm, UserAuthenticationForm
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, get_user_model
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render, redirect
+from rest_framework.response import Response
+from rest_framework.views import APIView
 # Create your views here.
 
 def home_screen_view(request):
@@ -75,13 +76,18 @@ def sign_up(request):
         
     return render(request, 'registration/sign_up.html', {"form":form})
 
-def user_profile_view(request):
-    id = request.POST.get('id', '200') #Gets the post id from the post request from the Forum. 200 is just a default random value in case id does not exist
+def bad_profile_view(request):
+    return render(request, "bad_user.html")
+
+def user_profile_view(request, user_id):
     try:
-        Post.objects.filter(post_id=id)[0] #Checks if the id from the url is equals to any post_id from the database and grabs the first value
-    except:
-        print("An error occured with post_id")
-    context = {'Post':Post} #Passes that first value (the post id) to the context
+        user = User.objects.get(id = user_id)
+    except ObjectDoesNotExist:
+        return render(request, "bad_user.html")
+    context = {}
+    context["username"] = user.username.upper()
+    context["num_posts"] = Post.objects.filter(posted_by = user_id).count()
+    context["num_comments"] = Reply.objects.filter(posted_by = user_id).count()
     return render(request, "userprofilepage.html", context)
 
 #####Test_Views

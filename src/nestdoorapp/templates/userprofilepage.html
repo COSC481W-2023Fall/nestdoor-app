@@ -24,7 +24,7 @@
                     <a href="/about">About</a>
                 </div>
                 <!-- Show user's name --Sal -->            
-                <h1 class = "title">{{user.username}}'s Profile Page</h1>
+                <h1 class = "title">{{ username }}'s Profile Page</h1>
                 <!-- If the user is logged in, then the About Me info is still shown, alongside the ability to edit that information --Sal -->
                 {% if user.is_authenticated %}
                 <h1 class="title">About me!</h1>
@@ -47,7 +47,7 @@
                 </div>
                 {% endif %}
                 <!-- User's Contributions --Sal -->
-                <h3><u>{{user.username}}'s Contributions</u><br> Posts: Number of user's posts here<br> Comments: Number of user's comments here</h3>
+                <h3><u>{{ username }}'s Contributions</u><br> Posts: {{ num_posts }}<br> Comments: {{ num_comments }} </h3>
             </div>
             <div class="footer">
                 <p class="footer-text-left">

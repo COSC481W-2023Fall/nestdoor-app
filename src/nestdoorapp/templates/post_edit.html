@@ -1,0 +1,11 @@
+{% if has_no_err == True %}
+<h3>{{post.title}}</h3>
+<form method="post" action="">
+	{% csrf_token %}
+	<textarea id="post_edit_content" name="edit_content" rows="5" cols="33">{{post.content}}</textarea>
+	<input type="hidden" name="post_id", value="{{post.post_id}}">
+	<input type="submit" value="Submit">
+</form>
+{% else %}
+{{err_msg}}
+{% endif %}

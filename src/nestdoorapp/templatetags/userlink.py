@@ -2,24 +2,14 @@ from django.template import Library, Node
 from django.template.exceptions import TemplateSyntaxError
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.safestring import mark_safe
      
 register = Library()
      
-class LatestContentNode(Node):
-    def __init__(self, id):
-        self.id = id    
-        
-    def render(self, context):
-        try:
-            user = User.objects.get(id = self.id)
-            return "<a href=\"/user/" + str(self.id) + "\">" + user.username + "</a>"
-        except ObjectDoesNotExist:
-            return "Bad user."
- 
-def userlink(parser, token):
-    bits = token.contents.split()
-    if len(bits) != 2:
-        raise TemplateSyntaxError("userlink tag takes one argument, a user ID")
-    return LatestContentNode(bits[1])
-    
-userlink = register.tag(userlink)
+@register.simple_tag
+def userlink(user_id):
+    try:
+        user = User.objects.get(id = user_id)
+        return mark_safe("<a class=\"userlink\" href=\"/user/" + str(user_id) + "\">" + user.username.upper() + "</a>")
+    except ObjectDoesNotExist:
+        return "Bad user."

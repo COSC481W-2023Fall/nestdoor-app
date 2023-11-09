@@ -14,14 +14,16 @@
             <div id="content-wrap">
                 <div class="topnav">
                     <a href="/homepage"><i class="fa-solid fa-crow"></i></a>
-                    <a class="/homepage"><i class="fa-solid fa-house"></i></a>
+                    <a href="/homepage"><i class="fa-solid fa-home"></i></a>
                     {% if user.is_authenticated %}
-                    <a href="/logout">Logout</a>
                     {% else %}
                     <a href="/login">Login</a>
                     {% endif %}
                     <a href="/forum">Forum</a>
-                    <a href="/about">About</a>
+                    <a class="active" href="">About</a>
+                    {% if user.is_authenticated %}
+                    <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
+                    {% endif %}
                 </div>
 
                 <!-- Show user's name --Sal -->            

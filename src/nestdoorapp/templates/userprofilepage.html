@@ -1,0 +1,90 @@
+{% load static %}
+{% load userlink %} 
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/userprofile.css' %}" />
+        <meta charset="UTF-8" />
+        <title>Home Page</title>
+        <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
+    </head>
+    <body>
+        <div id="page-container">
+            <div id="content-wrap">
+                <div class="topnav">
+                    <a href="/homepage"><i class="fa-solid fa-crow"></i></a>
+                    <a href="/homepage"><i class="fa-solid fa-home"></i></a>
+                    {% if user.is_authenticated %}
+                    {% else %}
+                    <a href="/login">Login</a>
+                    {% endif %}
+                    <a href="/forum">Forum</a>
+                    <a href="/about">About</a>
+                    {% if user.is_authenticated %}
+                    <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
+                    {% endif %}
+                </div>
+                <!-- Show user's name --Sal -->            
+                <h1 class = "title">{{ username }}'s Profile Page</h1>
+                <!-- If the user is logged in, then the About Me info is still shown, alongside the ability to edit that information --Sal -->
+                {% if is_me %}
+                <h1 class="title">About me!</h1>
+                <div class="aboutme_content">
+                    <p id="edit">
+                        <b> "Oh? Your mouse is approaching me?"<br> "It can't edit your content without getting closer."<br> "Oh ho! Then move your mouse as close as you like." </b>
+                    </p>
+                </div>
+                <div class="text-center">
+                    <button type="submit" id="edit-button">Edit</button>
+                    <button type="submit" id="end-editing">Finish Editing</button>
+                </div>
+                <!-- If the user is NOT logged in, then the About Me info is ONLY shown for that user --Sal -->
+                {% else %}
+                <h1 class = "title">About me!</h1>
+                <div class="aboutme_content">
+                    <p>
+                        <b> Hello, I like to go fishing! </b>
+                    </p>
+                </div>
+                {% endif %}
+                <!-- User's Contributions --Sal -->
+                <h3>
+                    <u>{{ username }}'s Contributions</u><br />
+                    Posts: {{ num_posts }}<br  />
+                    Comments: {{ num_comments }}
+                </h3>
+            </div>
+            <div class="footer">
+                <p class="footer-text-left">
+                    <i class="fa-solid fa-copyright"></i> TEAM EAGLES
+                </p>
+                <p class="footer-text-right">
+                    COSC 481/581 - Fall 2023
+                </p>
+            </div>
+        </div>
+        <!-- The following javascript are for the buttons ("Edit" and "Finish Editing") and paragraph.  --Sal -->
+        <script> 
+            const paragraph = document.getElementById("edit"); //The actual About Me paragraph stuff
+            const edit_button = document.getElementById("edit-button"); //Edit button
+            const end_button = document.getElementById("end-editing"); //Finish Editing button
+            end_button.style.visibility = "hidden"; //Hides "Finish Editing" button upon page load
+
+            edit_button.addEventListener("click", function() { //Once "Edit" is clicked, about me is now editable and "Finish Editing" button is visible, but "Edit" is no longer visible
+                paragraph.contentEditable = true;
+                paragraph.style.backgroundColor = "#fffaf0";
+                end_button.style.visibility = "visible";
+                edit_button.style.visibility = "hidden";
+            } );
+
+            end_button.addEventListener("click", function() { //Once "Finish Editing" is clicked, about me is no longer editable and "Edit" button is visible, but "Finish Editing" is no longer visible
+                paragraph.contentEditable = false;
+                paragraph.style.backgroundColor = "#fffaf0";
+                end_button.style.visibility = "hidden"; 
+                edit_button.style.visibility = "visible";
+            } )
+        </script>
+    </body>
+</html>

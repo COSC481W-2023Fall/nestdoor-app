@@ -30,10 +30,13 @@ from nestdoorapp.views import (
     logout_view,
     forum_view,
     about_view,
+    user_profile_view,
+    user_post_view,
 )
 
 urlpatterns = [
     path('', include('nestdoorapp.urls')),
     #path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
+    
 ]

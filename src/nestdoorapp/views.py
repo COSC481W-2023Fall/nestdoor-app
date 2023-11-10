@@ -77,7 +77,7 @@ def user_post_view(request, pk):
             for_post_id=post,
             content=request.POST.get('body')
         )
-        return redirect('user_post', pk=post_id)
+        return redirect('user_post', pk=post.post_id)
 
     context = {'post': post, 'comments': comments}
     return render(request, 'userpost.html', context)

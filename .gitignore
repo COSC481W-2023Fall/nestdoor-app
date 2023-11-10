@@ -7,3 +7,4 @@ src/nestdoor/__pycache__
 src/functional_tests/chromedriver
 myenv
 src/db.sqlite3
+

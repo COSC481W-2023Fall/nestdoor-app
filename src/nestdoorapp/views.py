@@ -72,12 +72,12 @@ def user_post_view(request, pk):
     comments = post.reply_set.all()
 
     if request.method == 'POST':
-        comment = Message.objects.create(
+        comment = Reply.objects.create(
             posted_by=request.user,
             for_post_id=post,
             content=request.POST.get('body')
         )
-        return redirect('user_post', pk=post.id)
+        return redirect('user_post', pk=post_id)
 
     context = {'post': post, 'comments': comments}
     return render(request, 'userpost.html', context)

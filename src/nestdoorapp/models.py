@@ -77,8 +77,7 @@ class Reply(models.Model):
     # For now all replies are directly to the main post... need to reapproach replying to replies.
     # for_reply_id = models.ForeignKey('self', on_delete=models.CASCADE)
     datetime_posted = models.DateTimeField(auto_now_add=True)
-    posted_by = models.ForeignKey(
-        User, null=True, on_delete=models.SET_NULL, related_name="replies")
+    posted_by = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     # datetime_last_edited = models.DateTimeField(null=True)
 

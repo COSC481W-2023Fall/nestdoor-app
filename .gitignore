@@ -6,4 +6,4 @@ venv/
 src/nestdoor/__pycache__
 src/functional_tests/chromedriver
 myenv
-db.sqlite3
+src/db.sqlite3

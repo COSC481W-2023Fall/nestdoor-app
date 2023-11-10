@@ -280,75 +280,16 @@ p {
   }
 
 /* #### */
-  .post__box {
-    padding-left: 2rem;
-    padding-right: 2rem;
-    height: 80.5vh;
-    padding-bottom: 0;
-  }
+  /* Add this CSS to your existing styles or in a separate stylesheet */
 
-
-
-  
-  /* title--content area */
-.post__header {
-  max-height: 22vh;
+.post__header.scroll {
+  max-height: 150px; /* Set your preferred max height for post header */
   overflow-y: auto;
-  position: absolute;
-  width: 94.5%; 
-  padding-left: 0.5rem;
-  padding-right: 1rem;
-  background: transparent;
-  z-index: 999;
-  top: 4.4rem;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
 }
 
-.post__info h3 {
-  font-size: 2.4rem;
-  font-weight: 500;
-  color: black;
+.replies.scroll {
+  max-height: 200px; /* Set your preferred max height for replies */
+  overflow-y: auto;
 }
 
-.post__content {
-  color: #579826;
-  max-height: 15vh;
-
-
-}
-
-
-.scroll::-webkit-scrollbar {
-  width: 0.6rem;
-  background-color: rgb(230, 233, 142);
-  mix-blend-mode: multiply;
-  border-radius: 0.7rem;
-}
-
-
-.scroll::-webkit-scrollbar-thumb {
-  border-radius: 1rem;
-  background-color: rgb(218, 243, 205);
-}
-
-
-/*==============================
-=>  Layout
-================================*/
-
-.layout {
-  margin-top: 2.4rem;
-}
-
-.layout > .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-
-/**/
-.layout--2 > .container > div:first-child {
-  flex-basis: 100%;
-}
+/* Add any additional styling for post header and replies as needed */

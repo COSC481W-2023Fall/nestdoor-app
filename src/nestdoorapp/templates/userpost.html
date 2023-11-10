@@ -36,7 +36,7 @@
           <a class="active" href="">About</a>
           {% if user.is_authenticated %}
           <span class="welcome-user">
-            Welcome! Logged in as {% userlink your_id %} [<a
+            Welcome! Logged in as  [<a
               class="logout"
               href="/logout"
               >Logout</a
@@ -66,7 +66,7 @@
 
         <!-- # This block display all comments for a post -- lu -->
             <div class="post__reply">
-                <div class="replies__scroll">
+                <div class="replies scroll">
 
                     {% for comment in comments %}
                     <div class="reply">

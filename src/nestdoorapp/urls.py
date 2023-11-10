@@ -16,6 +16,7 @@ urlpatterns = [
     path('user/<int:user_id>', views.user_profile_view, name='user_profile'),
     # path('userpost/', views.user_post_view, name='user_post'),    --lu
     path('userpost/<str:pk>', views.user_post_view, name='user_post'),
+    path('deleteComment/<str:pk>', views.deleteComment, name='deleteComment'),
     path('view1/', views.join, name='join'),
     path('view2/', views.name_list, name='name_list'),
 ]

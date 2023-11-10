@@ -83,6 +83,17 @@ def user_post_view(request, pk):
     return render(request, 'userpost.html', context)
 
 
+def deleteComment(request, pk):
+    comment = Reply.objects.get(reply_id=pk)
+
+    # if request.user != comment.posted_by:
+    #     return HttpResponse('No Delete Permission.')
+
+    if request.method == 'POST':
+        comment.delete()
+        return redirect('user_post', pk=comment.for_post_id.post_id)
+    return render(request, 'deleteMessage.html', {'obj': comment})
+
 # def user_post_view(request):
 #     context = {}
     # ID num will we passed in... 1 is default

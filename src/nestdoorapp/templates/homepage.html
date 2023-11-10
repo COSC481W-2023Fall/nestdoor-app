@@ -1,64 +1,78 @@
 {% load static %}
+{% load userlink %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
-        <meta charset="UTF-8" />
-        <title>Home Page</title>
-    </head>
-    <body>
-        <div class="wrapper">
-          <!-- save for future use --lu -->
-          <!-- <div class="section"></div>
-          <div class="section"></div> -->
-          <div class="image"></div>
-        </div>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
+    <meta charset="UTF-8" />
+    <title>Home Page</title>
+    <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
 
-        <div id="page-container">
-            <div id="content-wrap">
-                <div class="topnav">
-                    <a href="/homepage"><img src={% static '/images/reed_logo_mini.png' %} alt="Nestdoor App Logo Small" style="width:30px;height:30px;" class="center" ></a>
-                    <a class="active" href="">Home</a>
-                    {% if user.is_authenticated %}
-                    <a href="/logout">Logout</a>
-                    {% else %}
-                    <a href="/login">Login</a>
-                    {% endif %}
-                    <a href="/forum">Forum</a>
-                    <a href="/about">About</a>
-                </div>
-                
-                <h1>Welcome to the Temporary Home Page!</h1>
-                {% if user.is_authenticated %}
-                <span> Welcome! Logged in as {{user.username}}</span>
-                {% endif %}
+</head>
+<body>
+    <div class="wrapper">
+        <!-- save for future use --lu -->
+        <!-- <div class="section"></div>
+        <div class="section"></div> -->
+        <div class="image"></div>
+    </div>
 
-                <div class="h_line"></div>
-                <h1 class="split-para">
+    <div id="page-container">
+        <div id="content-wrap">
+            <div class="topnav">
+                <a href="/homepage"><i class="fa-solid fa-crow"></i></a>
+                <a class="active" href="/homepage"><i class="fa-solid fa-home"></i></a>
                 {% if user.is_authenticated %}
-                <a href="/logout">Logout</a> </br> 
                 {% else %}
-                <a href="/login">Login</a> <br/> 
-                <a href="/logout">Logout</a> </br> 
-                <a href="/sign-up">Sign Up</a> <span>
-                <a href="/forum">Newest Posts!</a></span></h1>
+                <a href="/login">Login</a>
                 {% endif %}
-                <div class="h_line"></div>
-                <div class="container">{% block content %} {% endblock %}</div>
-                
+                <a href="/forum">Forum</a>
+                <a href="/about">About</a>
+                {% if user.is_authenticated %}
+                <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
+                {% endif %}
             </div>
-            <div class="footer">
-                <p class="footer-text-left">
-                    TEAM EAGLES
-                </p>
-                <p class="footer-text-right">
-                    COSC 481
-                </p>
 
-                <div class="footer-content-center">
-                    <a href="/homepage"><img src={% static '/images/reed_logo2.png' %} class="icon-style" alt="Nestdoor App Logo Small"></a>
+            <h1 class="title">Welcome to Nestdoor</h1>
+            <h2 class="subheading">F i n d&nbsp;&nbsp;y o u r&nbsp;&nbsp;&nbsp;f l o c k .</h2>
+
+
+            <div class="h_line"></div>
+            <div class="content-container">
+                <div class="signup">
+                    <h2>[Sign-up Page Content Here]</h2>
+                    {% block content %} {% endblock %}
+                </div>
+                <div class="popular">
+                    <h2>[Top 3 posts Content]</h2>
                 </div>
             </div>
+            <!-- <h1 class="split-para">
+            {% if user.is_authenticated %}
+            <a href="/logout">Logout</a> </br>
+            {% else %}
+            <a href="/login">Login</a> <br/>
+            <a href="/logout">Logout</a> </br>
+            <a href="/sign-up">Sign Up</a> <span>
+            <a href="/forum">Newest Posts!</a></span></h1>
+            {% endif %}
+             -->
+
         </div>
-    </body>
+
+        <div class="footer">
+            <p class="footer-text-left">
+                <i class="fa-solid fa-copyright"></i> TEAM EAGLES
+            </p>
+            <p class="footer-text-right">
+                COSC 481/581 - Fall 2023
+            </p>
+            <div class="footer-content-center">
+                <a href="/homepage"></a>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

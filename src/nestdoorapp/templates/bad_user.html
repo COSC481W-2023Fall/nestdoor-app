@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/userprofile.css' %}" />
+        <meta charset="UTF-8" />
+        <title>Home Page</title>
+        <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
+    </head>
+    <body>
+        <div id="page-container">
+            <div id="content-wrap">
+                <div class="topnav">
+                    <a href="/homepage"><i class="fa-solid fa-crow"></i></a>
+                    <a href="/homepage"><i class="fa-solid fa-home"></i></a>
+                    {% if user.is_authenticated %}
+                    {% else %}
+                    <a href="/login">Login</a>
+                    {% endif %}
+                    <a href="/forum">Forum</a>
+                    <a class="active" href="">About</a>
+                    {% if user.is_authenticated %}
+                    <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
+                    {% endif %}
+                </div>
+
+                <!-- Show user's name --Sal -->            
+                <h1 class = "title">That user does not exist!</h1>
+                <!-- If the user is logged in, then the About Me info is still shown, alongside the ability to edit that information --Sal -->
+
+                <div class="baduser_content">
+                    <p>
+                        <b>That is a bad user ID.  Go <a href="/">back to the main page</a>.</b>
+                    </p>
+                </div>
+            <div class="footer">
+                <p class="footer-text-left">
+                    <i class="fa-solid fa-copyright"></i> TEAM EAGLES
+                </p>
+                <p class="footer-text-right">
+                    COSC 481/581 - Fall 2023
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

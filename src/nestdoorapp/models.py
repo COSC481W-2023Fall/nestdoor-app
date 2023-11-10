@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from datetime import date
 
 # Create your models here.
 
@@ -28,19 +29,19 @@ class Member(models.Model):
     
 class Post(models.Model):
     # main
-    post_id = models.AutoField(primary_key=True, unique=True)
+    post_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
-    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="posts")
-    content = models.TextField()
     datetime_posted = models.DateTimeField(auto_now_add=True)
-    #number_replies = models.IntegerField(default=0, unique=False)
-    #datetime_last_edited = models.DateTimeField(null=True, auto_now_add=True)
+    posted_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="posts")
+    content = models.TextField()
+    number_replies = models.IntegerField(default=0)
+    # datetime_last_edited = models.DateTimeField(null=True)
     
     #Moderation functionality removed for the time being.
     # moderation
-    #datetime_last_moderated = models.DateTimeField(null=True, default=None)
-    #last_moderated_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="posts_moderated")
-    #moderated_note = models.TextField()
+    # datetime_last_moderated = models.DateTimeField(null=True)
+    # last_moderated_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="posts_moderated")
+    # moderated_note = models.TextField()
     
     def clean(self):
         super().clean()
@@ -48,7 +49,7 @@ class Post(models.Model):
         if self.content is None:
             raise ValidationError('Add content in order to post.')
         if self.title is None:
-            raise ValidationError('Add content in order to post.')
+            raise ValidationError('Add title in order to post.')
         # check constraint that a post moderation note contains content
         #if self.moderated_note is None:
             #raise ValidationError('Notes about moderations need to be included.')
@@ -71,16 +72,17 @@ class Reply(models.Model):
     # main
     reply_id = models.AutoField(primary_key=True)
     for_post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
-    for_reply_id = models.ForeignKey('self', on_delete=models.CASCADE)
-    datetime_posted = models.DateTimeField()
+    #For now all replies are directly to the main post... need to reapproach replying to replies.
+    #for_reply_id = models.ForeignKey('self', on_delete=models.CASCADE)
+    datetime_posted = models.DateTimeField(auto_now_add=True)
     posted_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="replies")
     content = models.TextField()
-    datetime_last_edited = models.DateTimeField(null=True)
+    #datetime_last_edited = models.DateTimeField(null=True)
     
     # moderation
-    datetime_last_moderated = models.DateTimeField(null=True)
-    last_moderated_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="replies_last_moderated")
-    moderated_note = models.TextField()
+    # datetime_last_moderated = models.DateTimeField(null=True)
+    # last_moderated_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="replies_last_moderated")
+    # moderated_note = models.TextField()
     
     def clean(self):
         super().clean()
@@ -88,17 +90,17 @@ class Reply(models.Model):
         if self.content is None:
             raise ValidationError('Add content in order to reply.')
         # check constraint that a reply id is set
-        if self.reply_id is None:
-            raise ValidationError('Reply Id must be set.')
+        # if self.reply_id is None:
+        #     raise ValidationError('Reply Id must be set.')
         # check constraint that a reply moderation note contains content
-        if self.moderated_note is None:
-            raise ValidationError('Notes about moderations need to be included.')
+        # if self.moderated_note is None:
+        #     raise ValidationError('Notes about moderations need to be included.')
             
     class Meta:
         constraints = [
             models.CheckConstraint(check=models.Q(content__isnull=False), name="reply_content_missing"),
             #'reply_content_missing': 'CHECK (content IS NOT NULL)',
-            models.CheckConstraint(check=models.Q(moderated_note__isnull=False), name="reply_moderation_content_missing"),
+            # models.CheckConstraint(check=models.Q(moderated_note__isnull=False), name="reply_moderation_content_missing"),
             #'post_moderation_content_missing': 'CHECK (moderated_note IS NOT NULL)',
             models.CheckConstraint(check=models.Q(reply_id__isnull=False), name="reply_id_missing")
             #'reply_id_missing': 'CHECK (reply_id IS NOT NULL)',

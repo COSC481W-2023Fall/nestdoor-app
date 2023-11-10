@@ -1,49 +1,70 @@
 {% load static %}
+{% load userlink %}
 <!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static '/css/about.css' %}" />
+        <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
     </head>
     <body>
         <div id="page-container">
             <div id="content-wrap">
                 <div class="topnav">
-                    <a href="/homepage"><img src={% static '/images/reed_logo_mini.png' %} alt="Nestdoor App Logo Small" style="width:30px;height:30px;" class="center" ></a>
-                    <a href="/homepage">Home</a>
-                    {% if user.is_authenticated %}
-                    <a href="/logout">Logout</a>
+                    <a href="/homepage"><i class = "fa-solid fa-crow"></i></a>
+                    <a href="/homepage"><i class = "fa-solid fa-home"></i></a>
+                    {% if user.is_authenticated %}                 
                     {% else %}
                     <a href="/login">Login</a>
                     {% endif %}
                     <a href="/forum">Forum</a>
                     <a class="active" href="">About</a>
+                    {% if user.is_authenticated %}
+                    <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
+                    {% endif %}
                 </div>
                 
-                <h1>Welcome to the Temporary About Page!</h1>
-
-                {% if user.is_authenticated %}
-                <span> Welcome! Logged in as {{user.username}}</span>
-                {% endif %}
-
-                <div class="h_line"></div>
-                <h1 class="split-para"><a href="/login">Login</a> <br/> <a href="/logout">Logout</a> <span><a href="/forum">Newest Posts!</a></span></h1>
-                <!--
-                <div class="vl">
-                    <a href="/forum"><h1>Newest Posts!</h1></a>
-                </div>
-                -->
-                <div class="h_line"></div>
+                <h1 class = "title">All About Nestdoor!<i class="fa-solid fa-crow"></i></h1>
                 
+                <div class="h_line"></div>
+
+                <div class = "content-container">
+                    <div class = "team">
+                        <h2 class = "team"><i class = "fa-solid fa-people-group"></i> Meet the Team</h2>
+                        <h3>Katie Tracy<span class = "sub"> - Team Lead</span>&nbsp;&nbsp;&nbsp;&nbsp;Griffin Collingridge<span class = "sub"> - Deputy</span></h3>
+                        <h3>Dianlu He&nbsp;&nbsp;<i class="fa-solid fa-circle"></i>&nbsp;&nbsp;Reed McAlpin&nbsp;&nbsp;<i class="fa-solid fa-circle"></i>&nbsp;&nbsp;Salvador Medina-Ruiz</h3>
+                        <h3>LaMonte Nunn&nbsp;&nbsp;<i class="fa-solid fa-circle"></i>&nbsp;&nbsp;Hailey O'Sullivan&nbsp;&nbsp;<i class="fa-solid fa-circle"></i>&nbsp;&nbsp;Madeline Smith&nbsp;&nbsp;<i class="fa-solid fa-circle"></i>&nbsp;&nbsp;Jamie Taylor</h3>
+                    </div>
+                    <div class = "description">
+                        <h2 class = ""><i class = "fa-solid fa-feather"></i> The App</h2>
+                        <p>A community platform for Eastern Michigan University Eagles to seek help from their flock, such as navigating the "coop" (campus) and their "nest" (department).
+                        Our intention was to create a helpful resource for EMU students. This application allows EMU students to ask questions regarding different topics (i.e. department-specific, campus navigation, local recommendations, etc.), and respond to other poster's questions.</p>
+                        <p>Future plans for this app include: a like/dislike feature, use of images and other media in posts and comments, and a Google Maps API implementation.</p>
+                    </div>
+                    <div class = "stack">
+                        <h2 class = ""><i class = "fa-solid fa-terminal"></i> Our Tech Stack and Development Details</h2>
+                        <p>Django is a sophisticated web development framework that boasts comprehensive stack functionalities.
+                            Our frontend devs predominantly focus on the construction of views, developing UI, and interactive forms.
+                            Conversely, our backend devs center on code to run on the server, specifically within the controllers and models of the framework. 
+                            Regarding Django's database capabilities, we utilized the default SQLite configurations.
+                            </p>
+                        <a target="_blank" class="btn" href="https://github.com/COSC481W-2023Fall/nestdoor-app">Our GitHub Repo</a>  
+                    </div>
+                </div>
             </div>
+
+
             <div class="footer">
                 <p class="footer-text-left">
-                    TEAM EAGLES
+                    <i class = "fa-solid fa-copyright"></i> TEAM EAGLES
                 </p>
                 <p class="footer-text-right">
-                    COSC 481
+                    COSC 481/581 - Fall 2023
                 </p>
                 <div class="footer-content-center">
-                    <a href="/homepage"><img src={% static '/images/reed_logo2.png' %} class="icon-style" alt="Nestdoor App Logo Small"></a>
+                    <a href="/homepage"></a>
                 </div>
             </div>
         </div>

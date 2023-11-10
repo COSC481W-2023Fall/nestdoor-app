@@ -1,14 +1,17 @@
-from django.shortcuts import render, redirect
-from rest_framework.views import APIView
 from . models import *
-from rest_framework.response import Response
 from . serializer import *
 from .forms import Memberform, RegisterForm, UserAuthenticationForm, PostCreationForm
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, get_user_model
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render, redirect
+from rest_framework.response import Response
+from rest_framework.views import APIView
 # Create your views here.
 
 def home_screen_view(request):
-    return render(request, "homepage.html", {}) #<-- {} for database variables
+    context = {}
+    context["your_id"] = request.user.id
+    return render(request, "homepage.html", context) #<-- {} for database variables
 
 def login_view(request):
     context = {}
@@ -39,7 +42,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     print("logged out")
-    return redirect(home)
+    return redirect('home')
     #return render(request, "home.html", {}) #<-- {} for database variables
 
 def forum_view(request):
@@ -47,6 +50,7 @@ def forum_view(request):
     # Pass in post objects for display
     posts = Post.objects.all()
     context['posts'] = posts
+    context["your_id"] = request.user.id
 
     #Default request GET
     if request.method == "GET":
@@ -59,7 +63,7 @@ def forum_view(request):
         if form.is_valid():
             print("valid form")
             obj = form.save(commit=False)
-            obj.author = user
+            obj.posted_by = user
             obj.save()
             form = PostCreationForm(request.GET)
             context['post_form'] = form
@@ -70,7 +74,25 @@ def forum_view(request):
     return render(request, "forum.html", context) #<-- {} for database variables
 
 def about_view(request):
-    return render(request, "about.html", {}) #<-- {} for database variables
+    context = {}
+    context["your_id"] = request.user.id
+    return render(request, "about.html", context ) #<-- {} for database variables
+
+def user_post_view(request):
+    context = {}
+    post_id = request.GET.get('postid', 1) # ID num will we passed in... 1 is default
+    post = Post.objects.filter(post_id=post_id)[0]
+    replies = Reply.objects.filter(for_post_id=post_id)
+    context['post'] = post
+    context['replies'] = replies
+    context["your_id"] = request.user.id
+    # id = request.POST.get('id', '200') #Gets the post id from the post request from the Forum. 200 is just a default random value in case id does not exist
+    # try:
+    #     Post.objects.filter(post_id=id)[0] #Checks if the id from the url is equals to any post_id from the database and grabs the first value
+    # except:
+    #     print("An error occured with post_id")
+    # context = {'Post':Post} #Passes that first value (the post id) to the context
+    return render(request, "userpost.html", context) #<-- {} for database variables
 
 def sign_up(request):
     if request.method == 'POST':
@@ -83,6 +105,24 @@ def sign_up(request):
         form = RegisterForm()
         
     return render(request, 'registration/sign_up.html', {"form":form})
+
+def bad_profile_view(request):
+    context = {}
+    context["your_id"] = request.user.id
+    return render(request, "bad_user.html", context)
+
+def user_profile_view(request, user_id):
+    try:
+        user = User.objects.get(id = user_id)
+    except ObjectDoesNotExist:
+        return render(request, "bad_user.html")
+    context = {}
+    context["is_me"] = request.user.id == user_id
+    context["username"] = user.username.upper()
+    context["num_posts"] = Post.objects.filter(posted_by = user_id).count()
+    context["num_comments"] = Reply.objects.filter(posted_by = user_id).count()
+    context["your_id"] = request.user.id
+    return render(request, "userprofilepage.html", context)
 
 #####Test_Views
 def join(request):

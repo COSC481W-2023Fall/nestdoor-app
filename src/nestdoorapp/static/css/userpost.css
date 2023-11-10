@@ -278,3 +278,77 @@ p {
   .btn:hover {
     background-color: darkseagreen;
   }
+
+/* #### */
+  .post__box {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    height: 80.5vh;
+    padding-bottom: 0;
+  }
+
+
+
+  
+  /* title--content area */
+.post__header {
+  max-height: 22vh;
+  overflow-y: auto;
+  position: absolute;
+  width: 94.5%; 
+  padding-left: 0.5rem;
+  padding-right: 1rem;
+  background: transparent;
+  z-index: 999;
+  top: 4.4rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.post__info h3 {
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: black;
+}
+
+.post__content {
+  color: #579826;
+  max-height: 15vh;
+
+
+}
+
+
+.scroll::-webkit-scrollbar {
+  width: 0.6rem;
+  background-color: rgb(230, 233, 142);
+  mix-blend-mode: multiply;
+  border-radius: 0.7rem;
+}
+
+
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: rgb(218, 243, 205);
+}
+
+
+/*==============================
+=>  Layout
+================================*/
+
+.layout {
+  margin-top: 2.4rem;
+}
+
+.layout > .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+
+/**/
+.layout--2 > .container > div:first-child {
+  flex-basis: 100%;
+}

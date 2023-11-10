@@ -108,6 +108,7 @@ def sign_up(request):
 
 def edit_post(request):
     context = {"has_no_err": True}
+    context["your_id"] = request.user.id
     if request.method == "GET":
         post_id = request.GET.get("post", None)
         if post_id != None:

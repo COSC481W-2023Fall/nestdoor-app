@@ -5,3 +5,5 @@ venv/
 .vscode/
 src/nestdoor/__pycache__
 src/functional_tests/chromedriver
+src/db.sqlite3
+.vs/

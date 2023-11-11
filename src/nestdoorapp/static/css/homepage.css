@@ -271,3 +271,17 @@ p {
   .btn:hover {
     background-color: darkseagreen;
   }
+
+  /* For login and signup pages */
+.login-content {
+  margin-top: 100px;
+  border: double darkgreen 5px;
+  background-color: floralwhite;
+  margin: 50px;
+  scrollbar-highlight-color: blue;
+  display:flexbox;
+}
+
+li{
+list-style-type: none;
+}

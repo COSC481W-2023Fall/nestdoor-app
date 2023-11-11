@@ -5,7 +5,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
     <meta charset="UTF-8" />
-    <title>Home Page</title>
+    <title>Nestdoor - Home</title>
     <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
@@ -42,11 +42,18 @@
             <div class="h_line"></div>
             <div class="content-container">
                 <div class="signup">
-                    <h2>[Sign-up Page Content Here]</h2>
+                    <h2>{% if user.is_authenticated %}
+                        <a href="/logout">Logout</a> </br>
+                        {% else %}
+                        <a href="/login">Login</a> <br/>
+                        <a href="/logout">Logout</a> </br>
+                        <a href="/sign-up">Sign Up</a> <span></h2>
+                        {% endif %}
+                    </h2>
                     {% block content %} {% endblock %}
                 </div>
                 <div class="popular">
-                    <h2>[Top 3 posts Content]</h2>
+                    <h2>Top 3 Posts Right Now!<br>[Swooping in soon...]</h2>
                 </div>
             </div>
             <!-- <h1 class="split-para">
@@ -69,9 +76,6 @@
             <p class="footer-text-right">
                 COSC 481/581 - Fall 2023
             </p>
-            <div class="footer-content-center">
-                <a href="/homepage"></a>
-            </div>
         </div>
     </div>
 </body>

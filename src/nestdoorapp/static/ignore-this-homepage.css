@@ -129,3 +129,32 @@ body {
     background-color:yellow;
     padding:5px;
   }
+
+/* For login and signup pages */
+.login {
+    margin-top: 100px;
+    border: double darkgreen 5px;
+    background-color: floralwhite;
+    margin: 50px;
+    scrollbar-highlight-color: blue;
+    display:flexbox;
+}
+
+.btn {
+  background-color: darkgreen;
+  border-radius: 4em;
+  color: whitesmoke;
+  padding: 15px 25px;
+  text-decoration: none;
+  font-weight: bolder;
+  margin-top: 30px;
+  font-family: 'Corben', Georgia, Times, serif;
+}
+
+.btn:hover {
+  background-color: darkseagreen;
+}
+ 
+li{
+  list-style-type: none;
+}

@@ -1,6 +1,6 @@
 from . models import *
 from . serializer import *
-from .forms import Memberform, RegisterForm, UserAuthenticationForm
+from .forms import Memberform, RegisterForm, UserAuthenticationForm, PostCreationForm
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
@@ -47,7 +47,30 @@ def logout_view(request):
 
 def forum_view(request):
     context = {}
+    # Pass in post objects for display
+    posts = Post.objects.all()
+    context['posts'] = posts
     context["your_id"] = request.user.id
+
+    #Default request GET
+    if request.method == "GET":
+        form = PostCreationForm(request.GET)
+
+    #If request post, user trying to submit a post
+    if request.method == "POST":
+        user = request.user
+        form = PostCreationForm(request.POST)
+        if form.is_valid():
+            print("valid form")
+            obj = form.save(commit=False)
+            obj.posted_by = user
+            obj.save()
+            form = PostCreationForm(request.GET)
+            context['post_form'] = form
+            return render(request, 'forum.html', context)
+        else:
+            print("form not valid")
+    context['post_form'] = form
     return render(request, "forum.html", context) #<-- {} for database variables
 
 def about_view(request):
@@ -57,7 +80,7 @@ def about_view(request):
 
 def user_post_view(request):
     context = {}
-    post_id = request.GET.get('postid', '1') # ID num will we passed in... 1 is default
+    post_id = request.GET.get('postid', 1) # ID num will we passed in... 1 is default
     post = Post.objects.filter(post_id=post_id)[0]
     replies = Reply.objects.filter(for_post_id=post_id)
     context['post'] = post

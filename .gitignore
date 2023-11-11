@@ -7,5 +7,5 @@ db.sqlite3
 .vscode/
 src/nestdoor/__pycache__
 src/functional_tests/chromedriver
-.vs/
 src/db.sqlite3
+.vs/

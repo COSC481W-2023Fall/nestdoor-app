@@ -26,33 +26,28 @@
                     <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
                     {% endif %}
                 </div>
-                <!-- Show user's name --Sal -->            
-                <h1 class = "title">{{ username }}'s Profile Page</h1>
+
+                <!-- Show user's name --Sal -->
+                <h1 class="title">{{ username }}'s Profile Page</h1>
+                <h1 class="title">About me!</h1>
+
                 <!-- If the user is logged in, then the About Me info is still shown, alongside the ability to edit that information --Sal -->
                 {% if is_me %}
-                <h1 class="title">About me!</h1>
-                <div class="aboutme_content">
-                    <p id="edit">
-                        <b> "Oh? Your mouse is approaching me?"<br> "It can't edit your content without getting closer."<br> "Oh ho! Then move your mouse as close as you like." </b>
-                    </p>
-                </div>
-                <div class="text-center">
-                    <button type="submit" id="edit-button">Edit</button>
-                    <button type="submit" id="end-editing">Finish Editing</button>
-                </div>
-                <!-- If the user is NOT logged in, then the About Me info is ONLY shown for that user --Sal -->
+                <form method="post">
+                    {% csrf_token %}
+                    <textarea name="about_me" class="aboutme_content">{{ about_me }}</textarea>
+                    <div class="text-center">
+                        <input type="submit" name="end-editing" value="Change About Me" />
+                    </div>
+                </form>
                 {% else %}
-                <h1 class = "title">About me!</h1>
-                <div class="aboutme_content">
-                    <p>
-                        <b> Hello, I like to go fishing! </b>
-                    </p>
-                </div>
+                <div class="aboutme_content">{{ about_me }}</div>
                 {% endif %}
+
                 <!-- User's Contributions --Sal -->
                 <h3>
                     <u>{{ username }}'s Contributions</u><br />
-                    Posts: {{ num_posts }}<br  />
+                    Posts: {{ num_posts }}<br />
                     Comments: {{ num_comments }}
                 </h3>
             </div>

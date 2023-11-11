@@ -89,12 +89,37 @@ def bad_profile_view(request):
     return render(request, "bad_user.html", context)
 
 def user_profile_view(request, user_id):
+    context = {}
+    context["is_me"] = request.user.id == user_id
+    
     try:
         user = User.objects.get(id = user_id)
     except ObjectDoesNotExist:
         return render(request, "bad_user.html")
-    context = {}
-    context["is_me"] = request.user.id == user_id
+
+    # get about_me and update if this is a post
+    try:
+        user_ext = UserExt.objects.get(user = user)
+        # check if this is a post and user has permission to post
+        if request.method =='POST' and request.user.id == user_id:
+            user_ext.about_me = request.POST["about_me"]
+            user_ext.save()
+        context["about_me"] = user_ext.about_me
+    # if the UserExt object has not yet been created
+    except ObjectDoesNotExist:
+        # check if this is a post and user has permission to post
+        if request.method =='POST' and request.user.id == user_id:
+            user_ext = UserExt()
+            user_ext.user = user
+            user_ext.about_me = request.POST["about_me"]
+            user_ext.save()
+            context["about_me"] = user_ext.about_me    
+        else:
+            # default about me
+            context["about_me"] = "This user has not filled out this about me yet."
+        
+
+    # build context variables
     context["username"] = user.username.upper()
     context["num_posts"] = Post.objects.filter(posted_by = user_id).count()
     context["num_comments"] = Reply.objects.filter(posted_by = user_id).count()

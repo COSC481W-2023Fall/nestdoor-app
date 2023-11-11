@@ -1,80 +1,31 @@
-{% load static %} {% load crispy_forms_tags %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
-        
-    </head>
-    <body>
-        <div id="page-container">
-            <div id="content-wrap">
-                <div class="topnav">
-                    <a href="/homepage"><img src={% static '/images/reed_logo_mini.png' %} alt="Nestdoor App Logo Small" style="width:30px;height:30px;" class="center" ></a>
-                    <a href="/homepage">Home</a>
-                    {% if user.is_authenticated %}
-                    <a href="/logout">Logout</a>
-                    {% else %}
-                    <a class="active" href="/login">Login</a>
-                    {% endif %}
-                    <a href="/forum">Forum</a>
-                    <a href="/about">About</a>
-                </div>
-                
-                <h1>Welcome to the Temporary Login Page!</h1>
-                
-                <form method="post">
-                    {% csrf_token %}
-                    <!-- {{ form|crispy }} -->
-                    {% for field in login_form %}
-                        <p style="color: black;">
-                            {{field.label_tag}}
-                            {{field}}
+{% extends 'homepage.html' %} {% load crispy_forms_tags %}
+{% block title %}Login{% endblock %} 
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <!-- {{ form|crispy }} -->
+    {% for field in login_form %}
+        <p style="color: black;">
+            {{field.label_tag}}
+            {{field}}
 
-                            {% if field.help_text %}
-                                <small style="color: grey;">
-                                    {{field.help_text}}
-                                </small>
-                            {% endif %}
-                            {% for error in field.errors %}
-                                <p style="color: red;">
-                                    {{error}}
-                                </p>
-                            {% endfor %}
-                        </p>
-                        {% endfor %}
-                        {% if login_form.non_field_errors %}
-                                <div style="color:red;">
-                                    <p>
-                                        {{login_form.non_field_errors}}
-                                    </p>
-                                </div>
-                            {% endif %}
-                    <div> Don't have an account? Create one <a href="/sign-up">Here</a>! </div>
-                <button type="submit" class="btn btn-success">Login</button>
-                </form>
-                
-
-                <div class="h_line"></div>
-                <h1 class="split-para"><a href="/login">Login</a> <br/> <a href="/logout">Logout</a> </br> <a href="/sign-up">Sign Up</a> <span><a href="/forum">Newest Posts!</a></span></h1>
-                <!--
-                <div class="vl">
-                    <a href="/forum"><h1>Newest Posts!</h1></a>
-                </div>
-                -->
-                <div class="h_line"></div>
-                
-            </div>
-            <div class="footer">
-                <p class="footer-text-left">
-                    TEAM EAGLES
+            
+            {% for error in field.errors %}
+                <p style="color: red;">
+                    {{error}}
                 </p>
-                <p class="footer-text-right">
-                    COSC 481
-                </p>
-                <div class="footer-content-center">
-                    <a href="/homepage"><img src={% static '/images/reed_logo2.png' %} class="icon-style" alt="Nestdoor App Logo Small"></a>
+            {% endfor %}
+        </p>
+        {% endfor %}
+        {% if login_form.non_field_errors %}
+                <div style="color:red;">
+                    <p>
+                        {{login_form.non_field_errors}}
+                    </p>
                 </div>
-            </div>
-        </div>
-    </body>
-</html>
+            {% endif %}
+    <div> Don't have an account? Create one <a href="/sign-up">Here</a>! </div>
+    <div> Forgot your password? click <a href="/password_reset">here</a>! </div>
+<button type="submit" class="btn btn-success">Login</button>
+</form>
+  {% endblock %}

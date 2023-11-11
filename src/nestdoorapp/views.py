@@ -71,6 +71,13 @@ def user_post_view(request):
     # context = {'Post':Post} #Passes that first value (the post id) to the context
     return render(request, "userpost.html", context) #<-- {} for database variables
 
+def password_reset(request):
+    return render(request, 'registration/password_reset.html', {})
+
+def password_reset_done(request):
+    return render(request, 'registration/password_reset_done.html', {})
+
+
 def sign_up(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)

@@ -2,102 +2,107 @@
 {% load userlink %}
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
-        <meta charset="UTF-8" />
+    <head>
         <title>Nestdoor - Forum</title>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
         <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
-</head>
-<style>
-    .flex-container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .flex-box {
-        border: 1px solid black;
-        width: 200px;
-        height: 100px;
-        margin: 20px;
-        text-align: center;
-        font-size: 40px;
-        overflow: auto;
-    }
-</style>
-<body>
-    <div id="page-container">
-        <div id="content-wrap">
-            <div class="topnav">
-                <a href="/homepage"><i class="fa-solid fa-crow"></i></a>
-                <a href="/homepage"><i class="fa-solid fa-home"></i></a>
-                {% if user.is_authenticated %}
-                {% else %}
-                <a href="/login">Login</a>
-                {% endif %}
-                <a class = "active" href="/forum">Forum</a>
-                <a href="/about">About</a>
-                {% if user.is_authenticated %}
-                <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
-                {% endif %}
-            </div>
+        <style>
+            .flex-container {
+                border: double darkgreen 5px;
+                background-color: floralwhite;
+                margin: 50px;
+                vertical-align: baseline;
+                scrollbar-highlight-color: blue;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .flex-box {
+                border: double darkgreen 5px;
+                background-color: floralwhite;
+                margin: 50px;
+                vertical-align: baseline;
+                width: 200px;
+                height: 100px;
+                margin: 20px;
+                text-align: center;
+                font-size: 40px;
+                overflow: auto;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div id="page-container">
+            <div id="content-wrap">
 
-            <h1>Welcome to the Temporary Forum Page!</h1>
-            {% if user.is_authenticated %}
-                <span> Welcome! Logged in as {{user.username}}</span>
-                <div style="color: black; padding-left: 10px;">
-                <form method="post">
-                {% csrf_token %}
-                {% for field in post_form %}
-                            {{field.label_tag}}
-                            <br>
-                            {{field}}
-                            <br>
-                {% endfor %}
-
-                {% if login_form.non_field_errors %}
-                            <div style="color:red;">
-                                <p>
-                                    {{post_form.non_field_errors}}
-                                </p>
-                            </div>
-                {% endif %}
-                <br>
-                <button type="submit" class="btn btn-success">Create Post</button>
-            </form>
-            </div>
-            {% endif %}
-
-            <div class="h_line"></div>
-            <div class="flex-container">
-                {% for post in posts %}
-                <div class="flex-box">
-                    <form method="POST" id="detailed-post">
-                        <a href="/userpost?postid={{post.post_id}}">{{post.title}}</a> <br>{{post.posted_by}}
-                    </form>
+                <div class="topnav">
+                    <a href="/homepage"><i class = "fa-solid fa-crow"></i></a>
+                    <a href="/homepage"><i class = "fa-solid fa-home"></i></a>
+                    {% if user.is_authenticated %}
+                    <a href="/logout">Logout</a>
+                    {% else %}
+                    <a href="/login">Login</a>
+                    {% endif %}
+                    <a class="active"  href="">Forum</a>
+                    <a href="/about">About</a>
+                    {% if user.is_authenticated %}
+                    <span> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
+                    {% endif %}
                 </div>
-                {% endfor %}
-            </div>
-            <div class="h_line"></div>
-            <h1 class="split-para"><a href="/login">Login</a> <br/> <a href="/logout">Logout</a> <span><a href="/forum">Newest Posts!</a></span></h1>
-            <!--
-            <div class="vl">
-                <a href="/forum"><h1>Newest Posts!</h1></a>
-            </div>
-            -->
-            <div class="h_line"></div>
+                
+                <h1 class = "title">Nestdoor Forum</h1>
+                <h2 class = "subheading">Ask your flock!</h2>
+                <div class = "signup">
+                {% if user.is_authenticated %}
+                    <div style="color: black; padding-left: 10px;">
+                        <form method="post">
+                            {% csrf_token %}
+                            {% for field in post_form %}
+                                    {{field.label_tag}}
+                                    <br>
+                                    {{field}}
+                                    <br>
+                            {% endfor %}
 
-        </div>
-        <div class="footer">
-            <p class="footer-text-left">
-                <i class="fa-solid fa-crow"></i>TEAM EAGLES
-            </p>
-            <p class="footer-text-right">
-                COSC 481/581 - Fall 2023
-            </p>
-        </div>
-    </div>
-</body>
+                            {% if login_form.non_field_errors %}
+                                    <div style="color:red;">
+                                        <p>
+                                            {{post_form.non_field_errors}}
+                                        </p>
+                                    </div>
+                            {% endif %}
+                            <br>
+                            <button type="submit" class="btn btn-success">Create Post</button>
+                        </form>
+                    </div> <!-- end form div -->
+
+                <div class="h_line"></div>
+
+                <div class="flex-container">
+                    {% for post in posts %}
+                    <div class="flex-box">
+                        <form method="POST" id="detailed-post">
+                            <a href="/userpost?postid={{post.post_id}}">{{post.title}}</a> <br>{{post.author}}
+                        </form>
+                    </div> <!-- end flex-box -->
+                    {% endfor %}
+                </div> <!-- end flex-container -->
+                {% endif %}
+            </div>
+                <div class="h_line"></div>
+            </div> <!-- end content-wrap -->   
+            <div class="footer">
+                <p class="footer-text-left">
+                    <i class="fa-solid fa-copyright"></i>TEAM EAGLES
+                </p>
+                <p class="footer-text-right">
+                    COSC 481/581 - Fall 2023
+                </p>
+            </div> <!-- end footer -->
+        </div> <!-- end page-container -->
+    </body>
 </html>

@@ -4,6 +4,11 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
+        <meta charset="UTF-8" />
+        <title>Nestdoor - Forum</title>
+        <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
 </head>
 <body>
     <div id="page-container">
@@ -15,8 +20,8 @@
                 {% else %}
                 <a href="/login">Login</a>
                 {% endif %}
-                <a href="/forum">Forum</a>
-                <a class="active" href="">About</a>
+                <a class = "active" href="/forum">Forum</a>
+                <a href="/about">About</a>
                 {% if user.is_authenticated %}
                 <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
                 {% endif %}
@@ -39,14 +44,11 @@
         </div>
         <div class="footer">
             <p class="footer-text-left">
-                TEAM EAGLES
+                <i class="fa-solid fa-crow"></i>TEAM EAGLES
             </p>
             <p class="footer-text-right">
-                COSC 481
+                COSC 481/581 - Fall 2023
             </p>
-            <div class="footer-content-center">
-                <a href="/homepage"><img src={% static '/images/reed_logo2.png' %} class="icon-style" alt="Nestdoor App Logo Small"></a>
-            </div>
         </div>
     </div>
 </body>

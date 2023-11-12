@@ -280,8 +280,8 @@ p {
   }
 
 /* #### */
-
-
+/* I, dianlu he, used some css template from https://github.com/divanov11/StudyBud/
+Thank you so much! */
 
 
 :root {
@@ -456,7 +456,7 @@ a {
   width: 94.5%; 
   padding-left: 2rem;
   padding-right:2rem;
-  background: red;
+  background: transparent;
   z-index: 999;
   top: 4.4rem;
   padding-top: 2rem;

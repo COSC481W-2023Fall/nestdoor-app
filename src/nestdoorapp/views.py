@@ -1,6 +1,6 @@
 from . models import *
 from . serializer import *
-from .forms import Memberform, RegisterForm, UserAuthenticationForm
+from .forms import Memberform, RegisterForm, UserAuthenticationForm, PostCreationForm
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
@@ -53,7 +53,29 @@ def logout_view(request):
 
 def forum_view(request):
     context = {}
+    # Pass in post objects for display
+    posts = Post.objects.all()
+    context['posts'] = posts
     context["your_id"] = request.user.id
+    # Default request GET
+    if request.method == "GET":
+        form = PostCreationForm(request.GET)
+
+    # If request post, user trying to submit a post
+    if request.method == "POST":
+        user = request.user
+        form = PostCreationForm(request.POST)
+        if form.is_valid():
+            print("valid form")
+            obj = form.save(commit=False)
+            obj.posted_by = user
+            obj.save()
+            form = PostCreationForm(request.GET)
+            context['post_form'] = form
+            return render(request, 'forum.html', context)
+        else:
+            print("form not valid")
+    context['post_form'] = form
     # <-- {} for database variables
     return render(request, "forum.html", context)
 
@@ -135,12 +157,36 @@ def bad_profile_view(request):
 
 
 def user_profile_view(request, user_id):
+    context = {}
+    context["is_me"] = request.user.id == user_id
+
     try:
         user = User.objects.get(id=user_id)
     except ObjectDoesNotExist:
         return render(request, "bad_user.html")
-    context = {}
-    context["is_me"] = request.user.id == user_id
+
+    # get about_me and update if this is a post
+    try:
+        user_ext = UserExt.objects.get(user=user)
+        # check if this is a post and user has permission to post
+        if request.method == 'POST' and request.user.id == user_id:
+            user_ext.about_me = request.POST["about_me"]
+            user_ext.save()
+        context["about_me"] = user_ext.about_me
+    # if the UserExt object has not yet been created
+    except ObjectDoesNotExist:
+        # check if this is a post and user has permission to post
+        if request.method == 'POST' and request.user.id == user_id:
+            user_ext = UserExt()
+            user_ext.user = user
+            user_ext.about_me = request.POST["about_me"]
+            user_ext.save()
+            context["about_me"] = user_ext.about_me
+        else:
+            # default about me
+            context["about_me"] = "This user has not filled out this about me yet."
+
+    # build context variables
     context["username"] = user.username.upper()
     context["num_posts"] = Post.objects.filter(posted_by=user_id).count()
     context["num_comments"] = Reply.objects.filter(posted_by=user_id).count()

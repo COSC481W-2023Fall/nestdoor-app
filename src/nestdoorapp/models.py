@@ -14,6 +14,12 @@ class React(models.Model):
         return f"{self.name} {self.detail}"
 
 
+class UserExt(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    about_me = models.TextField()
+
+
 class Member(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -40,6 +46,7 @@ class Post(models.Model):
     number_replies = models.IntegerField(default=0)
     # datetime_last_edited = models.DateTimeField(null=True)
 
+    # Moderation functionality removed for the time being.
     # moderation
     # datetime_last_moderated = models.DateTimeField(null=True)
     # last_moderated_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name="posts_moderated")
@@ -50,12 +57,14 @@ class Post(models.Model):
         # check constraint that a post contains content
         if self.content is None:
             raise ValidationError('Add content in order to post.')
-        # # check constraint that a post moderation note contains content
+        if self.title is None:
+            raise ValidationError('Add title in order to post.')
+        # check constraint that a post moderation note contains content
         # if self.moderated_note is None:
-        #     raise ValidationError('Notes about moderations need to be included.')
-        # # check constraint that a post id is set
+            # raise ValidationError('Notes about moderations need to be included.')
+        # check constraint that a post id is set
         # if self.post_id is None:
-        #     raise ValidationError('Post Id must be set.')
+        #   raise ValidationError('Post Id must be set.')
 
     class Meta:
         constraints = [
@@ -63,9 +72,8 @@ class Post(models.Model):
                 content__isnull=False), name="post_content_missing"),
             # 'post_content_missing': 'CHECK (content IS NOT NULL)',
             # models.CheckConstraint(check=models.Q(moderated_note__isnull=False), name="post_moderation_content_missing"),
-            # #'post_moderation_content_missing': 'CHECK (moderated_note IS NOT NULL)',
-            models.CheckConstraint(check=models.Q(
-                post_id__isnull=False), name="post_id_missing")
+            # 'post_moderation_content_missing': 'CHECK (moderated_note IS NOT NULL)',
+            # models.CheckConstraint(check=models.Q(post_id__isnull=False), name="post_id_missing")
             # 'post_id_missing': 'CHECK (post_id IS NOT NULL)',
         ]
 

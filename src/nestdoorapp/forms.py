@@ -1,5 +1,5 @@
 from django import forms
-from .models import Member
+from .models import Member, Post
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -11,6 +11,14 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
+
+class PostCreationForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea(attrs={'name':'body', 'rows':3, 'cols':50}))
+    title = forms.CharField()
+    class Meta:
+        model = Post
+        fields = ['title', 'content',]
+
 
 class UserAuthenticationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)

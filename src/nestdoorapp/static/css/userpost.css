@@ -124,40 +124,60 @@ p {
 }
 
 /* Top navigation */
-  .topnav {
-    background-color: rgb(0, 107, 54);
-    font-family: 'Corben', Georgia, Times, serif;
-    overflow: hidden;
-    text-align: center;
-    position: fixed;
-    display: block;
-    transition: top 0.3s;
-    width: 100%;
-    top: -5px;
-  }
-  
+.topnav {
+  background-color: rgb(0, 107, 54);
+  font-family: 'Corben', Georgia, Times, serif;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  position: fixed;
+  display: block;
+  transition: top 0.3s;
+  width: 100%;
+  top: -5px;
+}
+
   /* Style the links inside the navigation bar */
-  .topnav a {
-    float: left;
-    color: floralwhite;
-    display: block;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 25px;
+  .topnav a:not(.userlink,.logout) {
+      float: left;
+      color: floralwhite;
+      display: block;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 25px;
   }
-  
+
   /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: whitesmoke;
-    color: darkgreen;
+  .topnav a:hover:not(.userlink,.logout) {
+      background-color: whitesmoke;
+      color: darkgreen;
   }
-  
+
   /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: rgb(100, 147, 100);
-    color: whitesmoke;
+  .topnav a.active:not(.userlink,.logout) {
+      background-color: rgb(100, 147, 100);
+      color: whitesmoke;
   }
+
+.welcome-user {
+  position: relative;
+  top: 24px;
+}
+
+  .welcome-user,
+  .welcome-user a,
+  .welcome-user a.hover,
+  .welcome-user a.active {
+      color: floralwhite;
+  }
+
+      .welcome-user a,
+      .welcome-user a.hover,
+      .welcome-user a.active {
+          text-decoration: underline;
+          color: floralwhite;
+      }
 
   .center {
     display: block;
@@ -278,3 +298,338 @@ p {
   .btn:hover {
     background-color: darkseagreen;
   }
+
+/* #### */
+/* I, dianlu he, used some css template from https://github.com/divanov11/StudyBud/
+Thank you so much! */
+
+
+:root {
+  --color-main: #71c6dd;
+  --color-main-light: #e1f6fb;
+  --color-dark: #3f4156;
+  --color-dark-medium: #51546e;
+  --color-dark-light: #696d97;
+  --color-light: #e5e5e5;
+  --color-gray: #8b8b8b;
+  --color-light-gray: #b2bdbd;
+  --color-bg: #5e9557;
+  --color-success: #5dd693;
+  --color-error: #fc4b0b;
+}
+
+/*========== base styles ==========*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  /* color: inherit; */
+  font-size: inherit;
+}
+
+
+
+@media only screen and (min-width: 1200px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media only screen and (min-width: 2100px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+/**/
+body {
+  line-height: 1.6;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--color-light-gray);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+
+a {
+  display: inline-block;
+  color: var(--color-main);
+  text-decoration: none;
+}
+
+/*========== components ==========*/
+.container {
+  max-width: 120rem;
+  width: 90%;
+  margin: auto;
+}
+
+
+.scroll::-webkit-scrollbar {
+  width: 0.6rem;
+  background-color: rgb(230, 233, 142);
+  mix-blend-mode: multiply;
+  border-radius: 0.7rem;
+}
+
+
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 0.6rem;
+  background-color: rgb(218, 243, 205);
+}
+
+
+/*==============================
+=>  Layout
+================================*/
+
+.layout {
+  margin-top: 2.4rem;
+}
+
+.layout > .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+
+
+.layout--3 > .container > div:last-child {
+  flex-basis: 25%;
+}
+
+/**/
+.layout--2 > .container > div:first-child {
+  flex-basis: 100%;
+}
+
+
+
+
+
+/*==============================
+=>  Room
+================================*/
+
+.post {
+  background: floralwhite;
+  max-height: 75vh;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  position: relative;
+}
+
+
+.post__top {
+  background: green;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: relative;
+}
+
+.post__top svg,
+.thread__top svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  fill: var(--color-light);
+  cursor: pointer;
+}
+
+.post__topLeft {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.post__topLeft h3 {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-light);
+}
+
+.post__topLeft svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  fill: var(--color-light);
+}
+
+.post__topRight {
+  display: flex;
+  column-gap: 1em;
+}
+
+.post__topRight svg {
+  fill: var(--color-main-light);
+}
+
+/* title--content area */
+.post__header {
+  max-height: 30vh !important;
+  overflow-y: auto;
+  position: absolute;
+  width: 94.5%; 
+  padding-left: 2rem;
+  padding-right:2rem;
+  background: transparent;
+  z-index: 999;
+  top: 4.4rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+
+/* repy box height */
+.post__box {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  height: 70vh;
+  /* overflow-y: auto; */
+  padding-bottom: 0;
+}
+
+.room__info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.room__info h3 {
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: black;
+}
+
+.room__details {
+  color: #579826;
+  max-height: 15vh;
+
+
+}
+
+.room__hosted span {
+  text-transform: uppercase;
+  /* color: var(--color-gray); */
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 2;
+}
+
+.room__author {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.room__author:hover {
+  text-decoration: underline;
+}
+
+/* extend to botton */
+.room__conversation {
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+  height: 60%;
+}
+
+.threads h3 {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-gray);
+}
+
+.threads {
+  background: rgb(238, 244, 231);
+  border-radius: 0.7rem;
+  overflow-y: auto;
+  height: 100%;
+  margin-top: 26vh;
+  padding: 0 2rem 4rem 2rem;
+}
+
+.thread {
+  border-bottom: 2px dotted var(--color-dark);
+  padding-left: 1rem;
+  margin: 0rem 0;
+  padding: 1.5rem;
+  color: rgb(96, 123, 69);
+}
+
+.thread__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.thread__top svg {
+  fill: var(--color-dark-light);
+}
+
+.thread__author {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.thread__authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.thread__details {
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
+}
+
+
+
+.room__message {
+  width: 100%;
+  z-index: 111;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+}
+
+.message__button {
+  background: none;
+  border: none;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  aspect-ratio: 1;
+} 
+
+
+.room__message > form > input {
+  resize: none;
+  background-color: rgb(15, 105, 39);
+  color: var(--color-light);
+  border: none;
+  outline: none;
+  border-radius: 0.7rem;
+  height: 4rem;
+  width: 100%;
+  margin-top: -1rem;
+  padding: 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  position: relative;
+}
+
+
+.room__message > form > input::placeholder {
+  color: var(--color-light-gray);
+}

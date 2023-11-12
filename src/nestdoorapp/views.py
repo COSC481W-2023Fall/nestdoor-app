@@ -7,21 +7,25 @@ from django.shortcuts import render, redirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
 # Create your views here.
+from django.utils.html import escape
+
 
 def home_screen_view(request):
     context = {}
     context["your_id"] = request.user.id
-    return render(request, "homepage.html", context) #<-- {} for database variables
+    # <-- {} for database variables
+    return render(request, "homepage.html", context)
+
 
 def login_view(request):
     context = {}
 
-    #Check if user is already logged in.
+    # Check if user is already logged in.
     user = request.user
     if user.is_authenticated:
         return redirect('home')
 
-    #Check if requesting user login
+    # Check if requesting user login
     if request.method == "POST":
         form = UserAuthenticationForm(request.POST)
         if form.is_valid():
@@ -33,17 +37,20 @@ def login_view(request):
                 login(request, user)
                 return redirect('home')
 
-    #Else normal user login page.
+    # Else normal user login page.
     else:
         form = UserAuthenticationForm()
     context['login_form'] = form
-    return render(request, "registration/login.html", context) #<-- {} for database variables
+    # <-- {} for database variables
+    return render(request, "registration/login.html", context)
+
 
 def logout_view(request):
     logout(request)
     print("logged out")
     return redirect('home')
-    #return render(request, "home.html", {}) #<-- {} for database variables
+    # return render(request, "home.html", {}) #<-- {} for database variables
+
 
 def forum_view(request):
     context = {}
@@ -51,12 +58,11 @@ def forum_view(request):
     posts = Post.objects.all()
     context['posts'] = posts
     context["your_id"] = request.user.id
-
-    #Default request GET
+    # Default request GET
     if request.method == "GET":
         form = PostCreationForm(request.GET)
 
-    #If request post, user trying to submit a post
+    # If request post, user trying to submit a post
     if request.method == "POST":
         user = request.user
         form = PostCreationForm(request.POST)
@@ -71,28 +77,98 @@ def forum_view(request):
         else:
             print("form not valid")
     context['post_form'] = form
-    return render(request, "forum.html", context) #<-- {} for database variables
+    # <-- {} for database variables
+    return render(request, "forum.html", context)
+
 
 def about_view(request):
     context = {}
     context["your_id"] = request.user.id
-    return render(request, "about.html", context ) #<-- {} for database variables
+    # <-- {} for database variables
+    return render(request, "about.html", context)
 
-def user_post_view(request):
-    context = {}
-    post_id = request.GET.get('postid', 1) # ID num will we passed in... 1 is default
-    post = Post.objects.filter(post_id=post_id)[0]
-    replies = Reply.objects.filter(for_post_id=post_id)
-    context['post'] = post
-    context['replies'] = replies
-    context["your_id"] = request.user.id
+ # Sensitive words list
+SENSITIVE_WORDS = ['sensitive', 'word', 'list']
+
+# Function to filter out sensitive words
+
+
+def filter_sensitive_words(content):
+
+    for word in SENSITIVE_WORDS:
+        # Replace sensitive words with asterisks
+        content = content.replace(word, '*' * len(word))
+    return content
+
+
+def user_post_view(request, pk):
+    post = Post.objects.get(post_id=pk)
+    comments = post.reply_set.all()
+
+    if request.method == 'POST':
+        body_content = request.POST.get('body', '')
+
+        filtered_body = filter_sensitive_words(body_content)
+
+        comment = Reply.objects.create(
+            posted_by=request.user,
+            for_post_id=post,
+            content=escape(filtered_body)
+        )
+        return redirect('user_post', pk=post.post_id)
+
+    context = {'post': post, 'comments': comments}
+    return render(request, 'userpost.html', context)
+
+# # lu
+# def user_post_view(request, pk):
+#     post = Post.objects.get(post_id=pk)
+
+#     comments = post.reply_set.all()
+
+#     if request.method == 'POST':
+#         comment = Reply.objects.create(
+#             posted_by=request.user,
+#             for_post_id=post,
+#             content=request.POST.get('body')
+#         )
+#         return redirect('user_post', pk=post.post_id)
+
+#     context = {'post': post, 'comments': comments}
+#     return render(request, 'userpost.html', context)
+
+
+def deleteComment(request, pk):
+    comment = Reply.objects.get(reply_id=pk)
+
+    # if request.user != comment.posted_by:
+    #     return HttpResponse('No Delete Permission.')
+
+    if request.method == 'POST':
+        comment.delete()
+        return redirect('user_post', pk=comment.for_post_id.post_id)
+    return render(request, 'deleteMessage.html', {'obj': comment})
+
+# def user_post_view(request):
+#     context = {}
+    # ID num will we passed in... 1 is default
+    # post_id = request.GET.get('postid', '1')
+    # post = Post.objects.filter(post_id=post_id)[0]
+    # replies = Reply.objects.filter(for_post_id=post_id)
+    # context['post'] = post
+    # context['replies'] = replies
+    # context["your_id"] = request.user.id
+
     # id = request.POST.get('id', '200') #Gets the post id from the post request from the Forum. 200 is just a default random value in case id does not exist
     # try:
     #     Post.objects.filter(post_id=id)[0] #Checks if the id from the url is equals to any post_id from the database and grabs the first value
     # except:
     #     print("An error occured with post_id")
     # context = {'Post':Post} #Passes that first value (the post id) to the context
-    return render(request, "userpost.html", context) #<-- {} for database variables
+    # <-- {} for database variables
+
+    # return render(request, "userpost.html", context)
+
 
 def password_reset(request):
     return render(request, 'registration/password_reset.html', {})
@@ -106,12 +182,13 @@ def sign_up(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request,user)
+            login(request, user)
             return redirect('/homepage')
     else:
         form = RegisterForm()
-        
-    return render(request, 'registration/sign_up.html', {"form":form})
+
+    return render(request, 'registration/sign_up.html', {"form": form})
+
 
 def edit_post(request):
     context = {"has_no_err": True}
@@ -155,45 +232,47 @@ def bad_profile_view(request):
     context["your_id"] = request.user.id
     return render(request, "bad_user.html", context)
 
+
 def user_profile_view(request, user_id):
     context = {}
     context["is_me"] = request.user.id == user_id
-    
+
     try:
-        user = User.objects.get(id = user_id)
+        user = User.objects.get(id=user_id)
     except ObjectDoesNotExist:
         return render(request, "bad_user.html")
 
     # get about_me and update if this is a post
     try:
-        user_ext = UserExt.objects.get(user = user)
+        user_ext = UserExt.objects.get(user=user)
         # check if this is a post and user has permission to post
-        if request.method =='POST' and request.user.id == user_id:
+        if request.method == 'POST' and request.user.id == user_id:
             user_ext.about_me = request.POST["about_me"]
             user_ext.save()
         context["about_me"] = user_ext.about_me
     # if the UserExt object has not yet been created
     except ObjectDoesNotExist:
         # check if this is a post and user has permission to post
-        if request.method =='POST' and request.user.id == user_id:
+        if request.method == 'POST' and request.user.id == user_id:
             user_ext = UserExt()
             user_ext.user = user
             user_ext.about_me = request.POST["about_me"]
             user_ext.save()
-            context["about_me"] = user_ext.about_me    
+            context["about_me"] = user_ext.about_me
         else:
             # default about me
             context["about_me"] = "This user has not filled out this about me yet."
-        
 
     # build context variables
     context["username"] = user.username.upper()
-    context["num_posts"] = Post.objects.filter(posted_by = user_id).count()
-    context["num_comments"] = Reply.objects.filter(posted_by = user_id).count()
+    context["num_posts"] = Post.objects.filter(posted_by=user_id).count()
+    context["num_comments"] = Reply.objects.filter(posted_by=user_id).count()
     context["your_id"] = request.user.id
     return render(request, "userprofilepage.html", context)
 
-#####Test_Views
+# Test_Views
+
+
 def join(request):
     if request.method == "POST":
         form = Memberform(request.POST or None)
@@ -208,18 +287,18 @@ def name_list(request):
     all_members = Member.objects.all()
     return render(request, 'name_list.html', {'all': all_members})
 
+
 class ReactView(APIView):
-    
+
     serializer_class = ReactSerializer
-  
+
     def get(self, request):
-        detail = [ {"name": detail.name,"detail": detail.detail} 
-        for detail in React.objects.all()]
+        detail = [{"name": detail.name, "detail": detail.detail}
+                  for detail in React.objects.all()]
         return Response(detail)
-  
+
     def post(self, request):
         serializer = ReactSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-            return  Response(serializer.data)
-        
+            return Response(serializer.data)

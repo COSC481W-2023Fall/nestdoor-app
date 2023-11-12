@@ -17,8 +17,11 @@ urlpatterns = [
     path('about/', views.about_view, name='about'),
     path('user/', views.bad_profile_view, name='bad_profile_view'),
     path('user/<int:user_id>', views.user_profile_view, name='user_profile'),
-    path('userpost/', views.user_post_view, name='user_post'),
+    # path('userpost/', views.user_post_view, name='user_post'),
+    path('userpost/<str:pk>', views.user_post_view, name='user_post'),
+    path('deleteComment/<str:pk>',
+         views.deleteComment, name='deleteComment'),
     path('view1/', views.join, name='join'),
     path('view2/', views.name_list, name='name_list'),
-    #reset confirm/done/uidb64
 ]
+    #reset confirm/done/uidb64

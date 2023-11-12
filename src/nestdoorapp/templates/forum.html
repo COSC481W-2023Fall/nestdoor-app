@@ -1,101 +1,107 @@
-{% load static %}
-{% load userlink %}
+{% load static %} {% load userlink %}
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
-</head>
-<style>
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/homepage.css' %}"
+    />
+  </head>
+  <style>
     .flex-container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     .flex-box {
-        border: 1px solid black;
-        width: 200px;
-        height: 100px;
-        margin: 20px;
-        text-align: center;
-        font-size: 40px;
-        overflow: auto;
+      border: 1px solid black;
+      width: 200px;
+      height: 100px;
+      margin: 20px;
+      text-align: center;
+      font-size: 40px;
+      overflow: auto;
     }
-</style>
-<body>
+  </style>
+  <body>
     <div id="page-container">
-        <div id="content-wrap">
-            <div class="topnav">
-                <a href="/homepage"><i class="fa-solid fa-crow"></i></a>
-                <a href="/homepage"><i class="fa-solid fa-home"></i></a>
-                {% if user.is_authenticated %}
-                {% else %}
-                <a href="/login">Login</a>
-                {% endif %}
-                <a href="/forum">Forum</a>
-                <a class="active" href="">About</a>
-                {% if user.is_authenticated %}
-                <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
-                {% endif %}
-            </div>
+      <div id="content-wrap">
+        <div class="topnav">
+          <a href="/homepage"><i class="fa-solid fa-crow"></i></a>
+          <a href="/homepage"><i class="fa-solid fa-home"></i></a>
+          {% if user.is_authenticated %} {% else %}
+          <a href="/login">Login</a>
+          {% endif %}
+          <a href="/forum">Forum</a>
+          <a class="active" href="">About</a>
+          {% if user.is_authenticated %}
+          <span class="welcome-user">
+            Welcome! Logged in as {% userlink your_id %} [<a
+              class="logout"
+              href="/logout"
+              >Logout</a
+            >]</span
+          >
+          {% endif %}
+        </div>
 
-            <h1>Welcome to the Temporary Forum Page!</h1>
-            {% if user.is_authenticated %}
-                <span> Welcome! Logged in as {{user.username}}</span>
-                <div style="color: black; padding-left: 10px;">
-                <form method="post">
-                {% csrf_token %}
-                {% for field in post_form %}
-                            {{field.label_tag}}
-                            <br>
-                            {{field}}
-                            <br>
-                {% endfor %}
-
-                {% if login_form.non_field_errors %}
-                            <div style="color:red;">
-                                <p>
-                                    {{post_form.non_field_errors}}
-                                </p>
-                            </div>
-                {% endif %}
-                <br>
-                <button type="submit" class="btn btn-success">Create Post</button>
-            </form>
+        <h1>Welcome to the Temporary Forum Page!</h1>
+        {% if user.is_authenticated %}
+        <span> Welcome! Logged in as {{user.username}}</span>
+        <div style="color: black; padding-left: 10px">
+          <form method="post">
+            {% csrf_token %} {% for field in post_form %} {{field.label_tag}}
+            <br />
+            {{field}}
+            <br />
+            {% endfor %} {% if login_form.non_field_errors %}
+            <div style="color: red">
+              <p>{{post_form.non_field_errors}}</p>
             </div>
             {% endif %}
+            <br />
+            <button type="submit" class="btn btn-success">Create Post</button>
+          </form>
+        </div>
+        {% endif %}
 
-            <div class="h_line"></div>
-            <div class="flex-container">
-                {% for post in posts %}
-                <div class="flex-box">
-                    <form method="POST" id="detailed-post">
-                        <a href="/userpost?postid={{post.post_id}}">{{post.title}}</a> <br>{{post.posted_by}}
-                    </form>
-                </div>
-                {% endfor %}
-            </div>
-            <div class="h_line"></div>
-            <h1 class="split-para"><a href="/login">Login</a> <br/> <a href="/logout">Logout</a> <span><a href="/forum">Newest Posts!</a></span></h1>
-            <!--
+        <div class="h_line"></div>
+        <div class="flex-container">
+          {% for post in posts %}
+          <div class="flex-box">
+            <form method="POST" id="detailed-post">
+              <!-- <a href="/userpost?postid={{post.post_id}}">{{post.title}}</a> -->
+              <a href="/userpost/{{post.post_id}}">{{post.title}}</a>
+              <br />{{post.posted_by}}
+            </form>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="h_line"></div>
+        <h1 class="split-para">
+          <a href="/login">Login</a> <br />
+          <a href="/logout">Logout</a>
+          <span><a href="/forum">Newest Posts!</a></span>
+        </h1>
+        <!--
             <div class="vl">
                 <a href="/forum"><h1>Newest Posts!</h1></a>
             </div>
             -->
-            <div class="h_line"></div>
-
+        <div class="h_line"></div>
+      </div>
+      <div class="footer">
+        <p class="footer-text-left">TEAM EAGLES</p>
+        <p class="footer-text-right">COSC 481</p>
+        <div class="footer-content-center">
+          <a href="/homepage"
+            ><img src={% static '/images/reed_logo2.png' %} class="icon-style"
+            alt="Nestdoor App Logo Small"></a
+          >
         </div>
-        <div class="footer">
-            <p class="footer-text-left">
-                TEAM EAGLES
-            </p>
-            <p class="footer-text-right">
-                COSC 481
-            </p>
-            <div class="footer-content-center">
-                <a href="/homepage"><img src={% static '/images/reed_logo2.png' %} class="icon-style" alt="Nestdoor App Logo Small"></a>
-            </div>
-        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

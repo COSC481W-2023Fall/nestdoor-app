@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
 # Create your views here.
+from django.utils.html import escape
 
 
 def home_screen_view(request):
@@ -86,23 +87,55 @@ def about_view(request):
     # <-- {} for database variables
     return render(request, "about.html", context)
 
+ # Sensitive words list
+SENSITIVE_WORDS = ['sensitive', 'word', 'list']
 
-# lu
+# Function to filter out sensitive words
+
+
+def filter_sensitive_words(content):
+
+    for word in SENSITIVE_WORDS:
+        # Replace sensitive words with asterisks
+        content = content.replace(word, '*' * len(word))
+    return content
+
+
 def user_post_view(request, pk):
     post = Post.objects.get(post_id=pk)
-
     comments = post.reply_set.all()
 
     if request.method == 'POST':
+        body_content = request.POST.get('body', '')
+
+        filtered_body = filter_sensitive_words(body_content)
+
         comment = Reply.objects.create(
             posted_by=request.user,
             for_post_id=post,
-            content=request.POST.get('body')
+            content=escape(filtered_body)
         )
         return redirect('user_post', pk=post.post_id)
 
     context = {'post': post, 'comments': comments}
     return render(request, 'userpost.html', context)
+
+# # lu
+# def user_post_view(request, pk):
+#     post = Post.objects.get(post_id=pk)
+
+#     comments = post.reply_set.all()
+
+#     if request.method == 'POST':
+#         comment = Reply.objects.create(
+#             posted_by=request.user,
+#             for_post_id=post,
+#             content=request.POST.get('body')
+#         )
+#         return redirect('user_post', pk=post.post_id)
+
+#     context = {'post': post, 'comments': comments}
+#     return render(request, 'userpost.html', context)
 
 
 def deleteComment(request, pk):

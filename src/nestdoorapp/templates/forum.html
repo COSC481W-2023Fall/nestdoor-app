@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Nestdoor - Forum</title>
     <link
       rel="stylesheet"
       type="text/css"
@@ -27,8 +28,8 @@
     .flex-box {
       background-color: darkseagreen;  
       border: 1px solid black;
-      width: 200px;
-      height: 100px;
+      width: auto;
+      height: auto;
       margin: 20px;
       text-align: center;
       font-size: 40px;
@@ -44,7 +45,7 @@
           {% if user.is_authenticated %} {% else %}
           <a href="/login">Login</a>
           {% endif %}
-          <a class = "active" href="/">Forum</a>
+          <a class = "active" href="/forum">Forum</a>
           <a href="/about">About</a>
           {% if user.is_authenticated %}
           <span class="welcome-user">
@@ -89,7 +90,7 @@
             <form method="POST" id="detailed-post">
               <!--<a href="/userpost?postid={{post.post_id}}">{{post.title}}</a> -->
               <a href="/userpost/{{post.post_id}}">{{post.title}}</a>
-              <br />Posted by: {{post.posted_by}}
+              <br />Posted by: {% userlink post.posted_by.id%} 
             </form>
         </div>
           </div>

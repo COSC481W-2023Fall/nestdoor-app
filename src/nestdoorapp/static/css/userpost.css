@@ -124,40 +124,60 @@ p {
 }
 
 /* Top navigation */
-  .topnav {
-    background-color: rgb(0, 107, 54);
-    font-family: 'Corben', Georgia, Times, serif;
-    overflow: hidden;
-    text-align: center;
-    position: fixed;
-    display: block;
-    transition: top 0.3s;
-    width: 100%;
-    top: -5px;
-  }
-  
+.topnav {
+  background-color: rgb(0, 107, 54);
+  font-family: 'Corben', Georgia, Times, serif;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  position: fixed;
+  display: block;
+  transition: top 0.3s;
+  width: 100%;
+  top: -5px;
+}
+
   /* Style the links inside the navigation bar */
-  .topnav a {
-    float: left;
-    color: floralwhite;
-    display: block;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 25px;
+  .topnav a:not(.userlink,.logout) {
+      float: left;
+      color: floralwhite;
+      display: block;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 25px;
   }
-  
+
   /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: whitesmoke;
-    color: darkgreen;
+  .topnav a:hover:not(.userlink,.logout) {
+      background-color: whitesmoke;
+      color: darkgreen;
   }
-  
+
   /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: rgb(100, 147, 100);
-    color: whitesmoke;
+  .topnav a.active:not(.userlink,.logout) {
+      background-color: rgb(100, 147, 100);
+      color: whitesmoke;
   }
+
+.welcome-user {
+  position: relative;
+  top: 24px;
+}
+
+  .welcome-user,
+  .welcome-user a,
+  .welcome-user a.hover,
+  .welcome-user a.active {
+      color: floralwhite;
+  }
+
+      .welcome-user a,
+      .welcome-user a.hover,
+      .welcome-user a.active {
+          text-decoration: underline;
+          color: floralwhite;
+      }
 
   .center {
     display: block;

@@ -57,6 +57,7 @@ button:active {
 }
 
 .aboutme_content {
+  display: block;
   background-color: floralwhite;
   height:200px;
   width:50%;

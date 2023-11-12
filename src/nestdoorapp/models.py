@@ -10,8 +10,13 @@ class React(models.Model):
     detail = models.CharField(max_length=255)
     def __str__(self):
         return f"{self.name} {self.detail}"
+    
+class UserExt(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    about_me = models.TextField()
+        
       
-
 class Member(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)

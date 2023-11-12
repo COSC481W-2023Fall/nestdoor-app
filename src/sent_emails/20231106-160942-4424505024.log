@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: lnunn6@emich.edu
+Date: Mon, 06 Nov 2023 16:09:42 -0000
+Message-ID: <169928698288.37941.192009019971960034@public-64-180.emich.edu>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/reset/NA/bx93k6-6f515e147dea2c76d851f9febb143bc7/
+
+Your username, in case you’ve forgotten: lamontenunn
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------

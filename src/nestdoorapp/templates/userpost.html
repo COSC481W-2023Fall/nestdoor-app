@@ -36,9 +36,12 @@
           <a class="active" href="">About</a>
           {% if user.is_authenticated %}
           <span class="welcome-user">
-            Welcome! Logged in as [<a class="logout" href="/logout">Logout</a
-            >]</span
-          >
+            Welcome! Logged in as {% userlink request.user.id %} [<a
+              class="logout"
+              href="/logout"
+              >Logout</a
+            >]
+          </span>
           {% endif %}
         </div>
       </div>

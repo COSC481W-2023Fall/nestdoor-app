@@ -123,8 +123,45 @@ p {
   padding-bottom: 80px;    /* Footer height from above it */
 }
 
+
 /* Top navigation */
-  .topnav {
+.topnav {
+  background-color: rgb(0, 107, 54);
+  font-family: 'Corben', Georgia, Times, serif;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  position: fixed;
+  display: block;
+  transition: top 0.3s;
+  width: 100%;
+  top: -5px;
+}
+
+  /* Style the links inside the navigation bar */
+  .topnav a:not(.userlink,.logout) {
+      float: left;
+      color: floralwhite;
+      display: block;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 25px;
+  }
+
+  /* Change the color of links on hover */
+  .topnav a:hover:not(.userlink,.logout) {
+      background-color: whitesmoke;
+      color: darkgreen;
+  }
+
+  /* Add a color to the active/current link */
+  .topnav a.active:not(.userlink,.logout) {
+      background-color: rgb(100, 147, 100);
+      color: whitesmoke;
+  }
+/* Top navigation */
+  /* .topnav {
     background-color: rgb(0, 107, 54);
     font-family: 'Corben', Georgia, Times, serif;
     overflow: hidden;
@@ -134,10 +171,10 @@ p {
     transition: top 0.3s;
     width: 100%;
     top: -5px;
-  }
+  } */
   
   /* Style the links inside the navigation bar */
-  .topnav a {
+  /* .topnav a {
     float: left;
     color: floralwhite;
     display: block;
@@ -145,19 +182,19 @@ p {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 25px;
-  }
+  } */
   
   /* Change the color of links on hover */
-  .topnav a:hover {
+  /* .topnav a:hover {
     background-color: whitesmoke;
     color: darkgreen;
-  }
+  } */
   
   /* Add a color to the active/current link */
-  .topnav a.active {
+  /* .topnav a.active {
     background-color: rgb(100, 147, 100);
     color: whitesmoke;
-  }
+  } */
 
   .center {
     display: block;
@@ -450,10 +487,10 @@ a {
 
 /* title--content area */
 .post__header {
-  max-height: 30vh !important;
+  max-height: 5vh;
   overflow-y: auto;
   position: absolute;
-  width: 94.5%; 
+  width: 60%; 
   padding-left: 2rem;
   padding-right:2rem;
   background: transparent;

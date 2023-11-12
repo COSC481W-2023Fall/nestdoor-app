@@ -33,8 +33,8 @@
                     {% else %}
                     <a href="/login">Login</a>
                     {% endif %}
-                    <a href="/forum">Forum</a>
-                    <a class="active" href="">About</a>
+                    <a class="active" href="/forum">Forum</a>
+                    <a href="/about">About</a>
 					{% if user.is_authenticated %}
                     <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
                     {% endif %}
@@ -43,7 +43,7 @@
 				{% if has_no_err == True %}
 				<h1 class="title">{{post.title}}</h1>
 				<div class="flex-container-input">
-					<form method="post" action="">
+					<form method="post" action="/">
 						{% csrf_token %}
 						<textarea class="flex-container-input" id="post_edit_content" name="edit_content" rows="5" cols="33">{{post.content}}</textarea>
 						<input type="hidden" name="post_id", value="{{post.post_id}}">

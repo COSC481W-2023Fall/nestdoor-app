@@ -91,6 +91,9 @@
               <!--<a href="/userpost?postid={{post.post_id}}">{{post.title}}</a> -->
               <a href="/userpost/{{post.post_id}}">{{post.title}}</a>
               <br />Posted by: {% userlink post.posted_by.id%} 
+              {% if post.posted_by == user %}
+                        <a href="/edit?post={{post.post_id}}">(Edit)</a>
+              {% endif %}
             </form>
         </div>
           </div>

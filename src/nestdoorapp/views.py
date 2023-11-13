@@ -43,6 +43,9 @@ def logout_view(request):
     return redirect(home)
     #return render(request, "home.html", {}) #<-- {} for database variables
 
+def is_ajax(request):
+    return request.headers.get('x-requested-with') == 'XMLHttpRequest'
+
 def forum_view(request):
     context = {}
     # Pass in post objects for display
@@ -69,17 +72,16 @@ def forum_view(request):
         else:
             print("form not valid")
     
+    if is_ajax(request):
+        loadtitle = request.GET.get('post_title')
+        loaded = int(offset)
+        postslimit = 4
+        post_four = list(Post.objects.values()[loaded:loaded+postslimit])
+        data = {'posts': post_four}
+        return JsonResponse(data=data)
+
     context['post_form'] = form
     return render(request, "forum.html", context={'posts': posts, 'total': total}) #<-- {} for database variables
-
-#If load more posts is clicked, load more posts
-def load_more(request):
-    loadposts = request.GET.get('next_posts')
-    loaded = int(offset)
-    postslimit = 4
-    post_four = list(Post.objects.values()[loaded:loaded+postslimit])
-    data = {'posts': post_four}
-    return JsonResponse(data=data)
 
 def about_view(request):
     return render(request, "about.html", {}) #<-- {} for database variables

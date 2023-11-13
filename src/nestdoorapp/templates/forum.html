@@ -25,15 +25,16 @@
     <script>
         function loadMorePosts(){
             const content_container = document.getElementById("content");
-            var _current_item = $('.single_content').length
+            alert("load more posts")
             $.ajax({
                 url: '',
                 type: 'GET',
                 data: {
-                    'next_posts': _current_item
+                    'post_title': post.title,
+                    'post_author': post.author,
                 },
                 success: function (response) {
-                    const data = response.posts
+                    const data = response.posts;
                     data.map(post => {
                         content_container.innerHTML += '<div class="flex-box"><a href="">${post.title}</a>${post.author}</div>'
                     })

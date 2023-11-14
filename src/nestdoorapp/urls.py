@@ -14,6 +14,7 @@ urlpatterns = [
     path('accounts/password_reset_done/', views.password_reset_done, name='password_reset_done'),
 
     path('forum/', views.forum_view, name='forum'),
+    path('edit/', views.edit_post, name="edit"),
     path('about/', views.about_view, name='about'),
     path('user/', views.bad_profile_view, name='bad_profile_view'),
     path('user/<int:user_id>', views.user_profile_view, name='user_profile'),

@@ -1,0 +1,69 @@
+{% load static %}
+{% load userlink %}
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="{% static '/css/homepage.css' %}" />
+		<meta charset="UTF-8" />
+		<script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
+	</head>
+
+	<style>
+		.flex-container-input {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			margin: auto;
+			display: block;
+			padding: 5px;
+			text-align: center;
+		}
+	</style>
+
+	<body>
+		<div id="page-container">
+			<div id="content-wrap">
+				<div class="topnav">
+                    <a href="/homepage"><i class="fa-solid fa-crow"></i></a>
+                    <a href="/homepage"><i class="fa-solid fa-home"></i></a>
+                    {% if user.is_authenticated %}
+                    {% else %}
+                    <a href="/login">Login</a>
+                    {% endif %}
+                    <a class="active" href="/forum">Forum</a>
+                    <a href="/about">About</a>
+					{% if user.is_authenticated %}
+                    <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
+                    {% endif %}
+                </div>
+
+				{% if has_no_err == True %}
+				<h1 class="title">{{post.title}}</h1>
+				<div class="flex-container-input">
+					<form method="post" action="/edit/">
+						{% csrf_token %}
+						<textarea class="flex-container-input" id="post_edit_content" name="edit_content" rows="5" cols="33">{{post.content}}</textarea>
+						<input type="hidden" name="post_id", value="{{post.post_id}}">
+						<br>
+						<input type="submit" value="Submit">
+					</form>
+					{% else %}
+					{{err_msg}}
+					{% endif %}
+				</div>
+			</div>
+			<div class="footer">
+                <p class="footer-text-left">
+                    <i class="fa-solid fa-copyright"></i> TEAM EAGLES
+                </p>
+                <p class="footer-text-right">
+                    COSC 481/581 - Fall 2023
+                </p>
+            </div>
+		</div>
+	</body>
+
+</html>

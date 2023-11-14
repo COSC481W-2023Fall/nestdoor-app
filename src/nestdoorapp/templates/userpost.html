@@ -66,9 +66,9 @@
                 </a>
                 <h3>Home</h3>
               </div>
-              {% if post.host == request.user %}
+              {% if post.posted_by == request.user %}
               <div class="post__topRight">
-                <a href="{% url 'home' post.id %}">
+                <a href="{% url 'edit' post.post_id %}">
                   <svg
                     enable-background="new 0 0 24 24"
                     height="32"

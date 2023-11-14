@@ -487,10 +487,10 @@ a {
 
 /* title--content area */
 .post__header {
-  max-height: 5vh;
+  max-height: 30vh;
   overflow-y: auto;
   position: absolute;
-  width: 60%; 
+  width: 94.5%; 
   padding-left: 2rem;
   padding-right:2rem;
   background: transparent;

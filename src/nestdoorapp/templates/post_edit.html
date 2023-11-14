@@ -43,7 +43,7 @@
 				{% if has_no_err == True %}
 				<h1 class="title">{{post.title}}</h1>
 				<div class="flex-container-input">
-					<form method="post" action="/">
+					<form method="post" action="/edit/">
 						{% csrf_token %}
 						<textarea class="flex-container-input" id="post_edit_content" name="edit_content" rows="5" cols="33">{{post.content}}</textarea>
 						<input type="hidden" name="post_id", value="{{post.post_id}}">

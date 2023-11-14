@@ -216,7 +216,7 @@ def edit_post(request):
             if post.posted_by == request.user:
                 post.content = new_content
                 post.save()
-                return redirect("/userpost?postid=" + str(post_id))
+                return redirect("/userpost/" + str(post_id))
             else:
                 context["has_no_err"] = False
                 context["err_msg"] = "Logged in user does not match post author"

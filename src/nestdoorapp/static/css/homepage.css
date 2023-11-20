@@ -208,8 +208,8 @@ p {
 
     grid-template-columns: 2fr 1fr 2fr;
 
-    grid-template-areas: "a . b"
-                         "a . b";
+    grid-template-areas: "a b b"
+                         "a b b";
 }
 
 .popular {
@@ -254,6 +254,10 @@ p {
     font-family: 'Nobile', Helvetica, Arial, sans-serif;
     font-size: 20x;
     line-height: 25px;
+}
+
+ul li {
+  list-style-type: none; 
 }
 
 .btn {

@@ -166,8 +166,9 @@ p {
   }
 
 .welcome-user {
-  position: relative;
-  top: 24px;
+  float: right;
+  padding-top: 24px;
+  padding-right: 24px;
 }
 
   .welcome-user,

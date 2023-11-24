@@ -148,6 +148,11 @@ p {
       font-size: 25px;
   }
 
+  .topnav a.bird:hover:not(.userlink,.logout){
+    background-color: rgb(0, 107, 54);
+    color: floralwhite;
+  }
+
   /* Change the color of links on hover */
   .topnav a:hover:not(.userlink,.logout) {
       background-color: whitesmoke;
@@ -161,8 +166,9 @@ p {
   }
 
 .welcome-user {
-  position: relative;
-  top: 24px;
+  float: right;
+  padding-top: 24px;
+  padding-right: 24px;
 }
 
   .welcome-user,

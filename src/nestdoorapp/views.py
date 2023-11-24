@@ -116,8 +116,7 @@ def user_post_view(request, pk):
             content=escape(filtered_body)
         )
         return redirect('user_post', pk=post.post_id)
-
-    context = {'post': post, 'comments': comments}
+    context = {'post': post, 'comments': comments, 'your_id': request.user.id}
     return render(request, 'userpost.html', context)
 
 # # lu

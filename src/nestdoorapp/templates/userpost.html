@@ -72,7 +72,7 @@
                               <path d="M13.723 2.286l-13.723 13.714 13.719 13.714"></path>
                             </svg>
                           </a>
-                          <h3>Back to Forum</h3>
+                          <a href="{% url 'forum' %}">Back to Forum</a>
                         </div>
                         {% if post.posted_by == user %}
                         <div class="post__topRight">

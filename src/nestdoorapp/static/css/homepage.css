@@ -281,3 +281,7 @@ ul li {
   .btn:hover {
     background-color: darkseagreen;
   }
+
+  .invalid-feedback {
+    color: red;
+  }

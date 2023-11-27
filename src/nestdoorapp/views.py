@@ -116,8 +116,7 @@ def user_post_view(request, pk):
             content=escape(filtered_body)
         )
         return redirect('user_post', pk=post.post_id)
-
-    context = {'post': post, 'comments': comments}
+    context = {'post': post, 'comments': comments, 'your_id': request.user.id}
     return render(request, 'userpost.html', context)
 
 # # lu
@@ -170,6 +169,13 @@ def deleteComment(request, pk):
     # return render(request, "userpost.html", context)
 
 
+def password_reset(request):
+    return render(request, 'registration/password_reset.html', {})
+
+def password_reset_done(request):
+    return render(request, 'registration/password_reset_done.html', {})
+
+
 def sign_up(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -181,6 +187,43 @@ def sign_up(request):
         form = RegisterForm()
 
     return render(request, 'registration/sign_up.html', {"form": form})
+
+
+def edit_post(request):
+    context = {"has_no_err": True}
+    context["your_id"] = request.user.id
+    if request.method == "GET":
+        post_id = request.GET.get("post", None)
+        if post_id != None:
+            post = Post.objects.get(post_id__exact=post_id)
+            if post.posted_by == request.user:
+                context["post"] = post
+                return render(request, "post_edit.html", context)
+            else:
+                context["has_no_err"] = False
+                context["err_msg"] = "Logged in user does not match post author"
+                return render(request, "post_edit.html", context)
+        else:
+            context["has_no_err"] = False
+            context["err_msg"] = "Invalid request (missing post)"
+            return render(request, "post_edit.html", context)
+    else:
+        post_id = request.POST.get("post_id", None)
+        new_content = request.POST.get("edit_content", None)
+        if post_id != None and new_content != None:
+            post = Post.objects.get(post_id__exact=post_id)
+            if post.posted_by == request.user:
+                post.content = new_content
+                post.save()
+                return redirect("/userpost/" + str(post_id))
+            else:
+                context["has_no_err"] = False
+                context["err_msg"] = "Logged in user does not match post author"
+                return render(request, "post_edit.html", context)
+        else:
+            context["has_no_err"] = False
+            context["err_msg"] = "Invalid request (missing post_id or edit_context)"
+            return render(request, "post_edit.html", context)
 
 
 def bad_profile_view(request):

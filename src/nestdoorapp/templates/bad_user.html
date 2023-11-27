@@ -3,7 +3,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="{% static '/css/userprofile.css' %}" />
-        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Home Page</title>
         <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
@@ -13,16 +13,18 @@
         <div id="page-container">
             <div id="content-wrap">
                 <div class="topnav">
-                    <a href="/homepage"><i class="fa-solid fa-crow"></i></a>
-                    <a href="/homepage"><i class="fa-solid fa-home"></i></a>
+                    <a class="bird"><i class="fa-solid fa-crow"></i></a>
+                    <a class ="active" href="/homepage"><i class="fa-solid fa-home"></i></a>
                     {% if user.is_authenticated %}
                     {% else %}
                     <a href="/login">Login</a>
                     {% endif %}
                     <a href="/forum">Forum</a>
-                    <a class="active" href="">About</a>
+                    <a href="/about">About</a>
                     {% if user.is_authenticated %}
-                    <span class="welcome-user"> Welcome! Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
+                    <!--<a href="/user/{% userlink your_id %}"></a> -->
+                    <!--<a href="/logout">Logout</a>-->
+                    <span class="welcome-user">Logged in as {% userlink your_id %} [<a class="logout" href="/logout">Logout</a>]</span>
                     {% endif %}
                 </div>
 

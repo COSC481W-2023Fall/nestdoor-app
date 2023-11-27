@@ -107,6 +107,7 @@ class Reply(models.Model):
         #     raise ValidationError('Notes about moderations need to be included.')
 
     class Meta:
+        # add the ordering for reply
         ordering = ['-datetime_posted']
         constraints = [
             models.CheckConstraint(check=models.Q(

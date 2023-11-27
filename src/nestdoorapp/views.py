@@ -258,9 +258,9 @@ def user_profile_view(request, user_id):
             user_ext.about_me = request.POST["about_me"]
             user_ext.save()
             context["about_me"] = user_ext.about_me
-        else:
-            # default about me
-            context["about_me"] = "This user has not filled out this about me yet."
+        #else:
+            #default about me
+            #context["about_me"] = "This user has not filled out this about me yet."
 
     # build context variables
     context["username"] = user.username.upper()

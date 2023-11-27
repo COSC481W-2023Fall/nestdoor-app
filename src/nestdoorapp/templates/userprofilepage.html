@@ -5,7 +5,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="{% static '/css/userprofile.css' %}" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Home Page</title>
+        <title>Profile Page</title>
         <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
@@ -37,7 +37,7 @@
                 {% if is_me %}
                 <form method="post">
                     {% csrf_token %}
-                    <textarea name="about_me" class="aboutme_content">{{ about_me }}</textarea>
+                    <textarea name="about_me" class="aboutme_content" placeholder="Tell us about yourself...">{{ about_me }}</textarea>
                     <div class="text-center">
                         <input type="submit" name="end-editing" value="Change About Me" />
                     </div>

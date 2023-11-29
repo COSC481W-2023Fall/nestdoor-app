@@ -146,7 +146,8 @@ def deleteComment(request, pk):
     if request.method == 'POST':
         comment.delete()
         return redirect('user_post', pk=comment.for_post_id.post_id)
-    return render(request, 'deleteMessage.html', {'obj': comment})
+    context = {'comment': comment, 'your_id': request.user.id}
+    return render(request, 'deleteMessage.html', context)
 
 # def user_post_view(request):
 #     context = {}

@@ -13,6 +13,9 @@ from django.utils.html import escape
 def home_screen_view(request):
     context = {}
     context["your_id"] = request.user.id
+
+    posts = Post.objects.order_by('-datetime_posted')[:3]
+    context["posts"] = posts
     # <-- {} for database variables
     return render(request, "homepage.html", context)
 

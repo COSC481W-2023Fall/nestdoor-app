@@ -381,7 +381,7 @@ a {
 
 .scroll::-webkit-scrollbar {
   width: 0.6rem;
-  background-color: rgb(230, 233, 142);
+  background-color: darkseagreen;
   mix-blend-mode: multiply;
   border-radius: 0.7rem;
 }
@@ -389,7 +389,7 @@ a {
 
 .scroll::-webkit-scrollbar-thumb {
   border-radius: 0.6rem;
-  background-color: rgb(218, 243, 205);
+  background-color: #5e9557;
 }
 
 

@@ -9,7 +9,24 @@
     <script src="https://kit.fontawesome.com/88aa0bde0e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">
-
+    <style>
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .flex-box {
+            background-color: darkseagreen;  
+            border: 1px solid black;
+            width: auto;
+            height: auto;
+            margin: 20px;
+            text-align: center;
+            font-size: 40px;
+            overflow: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -56,9 +73,22 @@
                     {% block content %} {% endblock %}
                 </div>
                 <div class="popular">
-                    <h2>Top 3 Posts!<br>
-                        Fledgling Feature Coming Soon...
-                    </h2>
+                    <h2>Top 3 Posts!</h2>
+                    {% for post in posts %}
+                        <div class="flex-container">
+                            <div class="flex-box">
+                                <div class = "signup">
+                                    <div id="detailed-post">
+                                        <a href="/userpost/{{post.post_id}}">{{post.title}}</a>
+                                        <br />Posted by: {% userlink post.posted_by.id%} 
+                                        {% if post.posted_by == user %}
+                                            <a href="/edit?post={{post.post_id}}">(Edit)</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

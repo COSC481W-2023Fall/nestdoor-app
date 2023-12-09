@@ -1,7 +1,10 @@
 # nestdoor-app
 A community platform for Eastern Michigan University Eagles to seek help from their flock, such as navigating the "coop" (campus) and their "nest" (department).
 
-This project is going to be a helpful resource for EMU students.  This application allows EMU students to ask questions regarding different topics (i.e. department-specific, campus navigation, local recommendations, etc.), and respond to other poster's questions.  
+This project is going to be a helpful resource for EMU students.  This application allows EMU students to ask questions regarding different topics (i.e. department-specific, campus navigation, local recommendations, etc.), and respond to other poster's questions.
+
+Link to currently deployed website:
+https://nestdoor-app-zcquw.ondigitalocean.app/
 
 ## Meet Our Team!
 
